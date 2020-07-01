@@ -6,9 +6,13 @@
 package pesrona.bean;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import org.hibernate.Session;
+import pesrona.HibernateUtil;
+import pesrona.model.Role;
 
 /**
  *
@@ -18,28 +22,19 @@ import javax.faces.view.ViewScoped;
 @ViewScoped
 public class RolesBean implements Serializable {
 
-    /**
-     * Creates a new instance of RolesBean
-     */
-    public RolesBean() {
-    }
-    
-    private String name;
+    private List<Role> roles;
 
     @PostConstruct
     public void init() {
-        
-    }
-    
-    public void save() {
-        System.out.println(name);
-    }
-    
-    public String getName() {
-        return name;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        roles = session.createQuery("select o from Role o").getResultList();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
