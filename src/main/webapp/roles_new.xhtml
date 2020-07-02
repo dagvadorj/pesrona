@@ -7,17 +7,8 @@
     <ui:define name="content">
 
         <h:form>
-            
-            <h:commandLink value="New role" action="roles_new" />
-            
-            <h:dataTable value="#{rolesBean.roles}" var="role">
-                <h:column>
-                    <h:outputText value="#{role.id}" />
-                </h:column>
-                <h:column>
-                    <h:outputText value="#{role.name}" />
-                </h:column>
-            </h:dataTable>
+            <h:inputText value="#{rolesNewBean.name}" />
+            <h:commandButton value="Save" action="#{rolesNewBean.save()}" />
         </h:form>
 
     </ui:define>

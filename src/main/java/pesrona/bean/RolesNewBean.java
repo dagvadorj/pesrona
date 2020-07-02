@@ -30,7 +30,7 @@ public class RolesNewBean implements Serializable {
 
     }
 
-    public void save() {
+    public String save() {
 
         System.out.println(name);
 
@@ -40,10 +40,12 @@ public class RolesNewBean implements Serializable {
             role.setName(name);
             session.save(role);
             transaction.commit();
+            return "roles";
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Yes");
         }
+        return null;
     }
 
     public String getName() {
