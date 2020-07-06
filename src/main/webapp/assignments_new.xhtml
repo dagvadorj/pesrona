@@ -16,6 +16,10 @@
                 <f:selectItems value="#{assignmentsNewBean.users}" var="user"
                                itemValue="#{user.id}" itemLabel="#{user.name}" />
             </h:selectOneMenu>
+            <h:selectOneMenu value="#{assignmentsNewBean.userId}">
+                <f:selectItems value="#{assignmentsNewBean.resources}" var="resource"
+                               itemValue="#{resource.id}" itemLabel="#{resource.name}" />
+            </h:selectOneMenu>
             <h:commandButton value="Save" action="#{assignmentsNewBean.save()}" />
         </h:form>
 

@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import pesrona.HibernateUtil;
 import pesrona.model.Assignment;
 import pesrona.model.Client;
+import pesrona.model.Resource;
 import pesrona.model.Role;
 import pesrona.model.User;
 
@@ -25,14 +26,17 @@ public class AssignmentsNewBean implements Serializable {
     
     private Long roleId;
     private Long userId;
+    private Long resourceId;
     private List<Client> roles;
     private List<User> users;
+    private List<Resource> resources;
 
     @PostConstruct
     public void init() {
         setSession(HibernateUtil.getSessionFactory().openSession());
         setRoles((List<Client>) getSession().createQuery("select o from Role o").getResultList());
         setUsers((List<User>) getSession().createQuery("select o from User o").getResultList());
+        resources = session.createQuery("select o from Resource o").getResultList();
     }
 
     public String save() {
@@ -121,6 +125,34 @@ public class AssignmentsNewBean implements Serializable {
      */
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    /**
+     * @return the resourceId
+     */
+    public Long getResourceId() {
+        return resourceId;
+    }
+
+    /**
+     * @param resourceId the resourceId to set
+     */
+    public void setResourceId(Long resourceId) {
+        this.resourceId = resourceId;
+    }
+
+    /**
+     * @return the resources
+     */
+    public List<Resource> getResources() {
+        return resources;
+    }
+
+    /**
+     * @param resources the resources to set
+     */
+    public void setResources(List<Resource> resources) {
+        this.resources = resources;
     }
 
 

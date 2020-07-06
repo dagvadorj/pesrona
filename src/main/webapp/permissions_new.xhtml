@@ -8,15 +8,21 @@
     <ui:define name="content">
 
         <h:form>
-            <h:selectOneMenu value="#{assignmentsNewBean.roleId}">
-                <f:selectItems value="#{assignmentsNewBean.roles}" var="role"
-                               itemValue="#{role.id}" itemLabel="#{role.name}" />
-            </h:selectOneMenu>
-            <h:selectOneMenu value="#{assignmentsNewBean.userId}">
-                <f:selectItems value="#{assignmentsNewBean.users}" var="user"
-                               itemValue="#{user.id}" itemLabel="#{user.name}" />
-            </h:selectOneMenu>
-            <h:commandButton value="Save" action="#{assignmentsNewBean.save()}" />
+            <h:panelGrid columns="2">
+                <h:selectOneMenu value="#{permissionsNewBean.roleId}">
+                    <f:selectItems value="#{permissionsNewBean.roles}" var="role"
+                                   itemValue="#{role.id}" itemLabel="#{role.name}" />
+                </h:selectOneMenu>
+                <h:selectOneMenu value="#{permissionsNewBean.clientId}">
+                    <f:selectItems value="#{permissionsNewBean.clients}" var="client"
+                                   itemValue="#{client.id}" itemLabel="#{client.name}" />
+                </h:selectOneMenu>
+                <h:selectOneMenu value="#{permissionsNewBean.scopeId}">
+                    <f:selectItems value="#{permissionsNewBean.scopes}" var="scope"
+                                   itemValue="#{scope.id}" itemLabel="#{scope.name}" />
+                </h:selectOneMenu>
+                <h:commandButton value="Save" action="#{permissionsNewBean.save()}" />
+            </h:panelGrid>
         </h:form>
 
     </ui:define>

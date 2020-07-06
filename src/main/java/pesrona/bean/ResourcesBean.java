@@ -23,19 +23,17 @@ import pesrona.model.Role;
 @ViewScoped
 public class ResourcesBean implements Serializable {
 
+    private Session session;
+    
     private List<Resource> resources;
 
     @PostConstruct
     public void init() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil.getSessionFactory().openSession();
         resources = session.createQuery("select o from Resource o").getResultList();
     }
 
     public List<Resource> getResources() {
         return resources;
-    }
-
-    public void setResources(List<Resource> resources) {
-        this.resources = resources;
     }
 }

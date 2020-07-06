@@ -13,7 +13,7 @@ import javax.persistence.Table;
  * @author poc
  */
 @Entity
-@Table
+@Table(name = "p_assignment")
 public class Assignment implements Serializable {
     
     @Id
