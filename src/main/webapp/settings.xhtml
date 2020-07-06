@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="./template.xhtml">
+
+    <ui:define name="content">
+
+        <h:form>
+            
+            
+            <h:dataTable value="#{settingsBean.settings}" var="setting">
+                <h:column>
+                    <h:outputText value="#{setting.name}" />
+                </h:column>
+                <h:column>
+                    <h:inputText value="#{settingsBean.settingValues[setting.id]}" />
+                </h:column>
+            </h:dataTable>
+            
+            <h:commandButton value="Update" action="#{settingsBean.update()}" />
+            
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

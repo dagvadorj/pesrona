@@ -13,7 +13,9 @@ import javax.faces.view.ViewScoped;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pesrona.HibernateUtil;
+import pesrona.model.Client;
 import pesrona.model.Role;
+import pesrona.model.User;
 
 /**
  *
@@ -21,7 +23,7 @@ import pesrona.model.Role;
  */
 @Named
 @ViewScoped
-public class RolesNewBean implements Serializable {
+public class UsersNewBean implements Serializable {
 
     private String name;
 
@@ -32,18 +34,15 @@ public class RolesNewBean implements Serializable {
 
     public String save() {
 
-        System.out.println(name);
-
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            Role role = new Role();
-            role.setName(name);
-            session.save(role);
+            User user = new User();
+            user.setName(name);
+            session.save(user);
             transaction.commit();
-            return "roles";
+            return "users";
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Yes");
         }
         return null;
     }

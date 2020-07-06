@@ -2,12 +2,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet name="/#{request.contextPath}/resources/css/default.css"/>
-        <h:outputStylesheet name="/#{request.contextPath}/resources/css/cssLayout.css"/>
+        <h:outputStylesheet name="#{request.contextPath}/css/default.css"/>
+        <h:outputStylesheet name="#{request.contextPath}/css/cssLayout.css"/>
         <title>Pesrona</title>
     </h:head>
 
@@ -17,8 +18,12 @@
             <ul>
                 <li><a href="roles.xhtml">Roles</a></li>
                 <li><a href="clients.xhtml">Clients</a></li>
+                <li><a href="scopes.xhtml">Scopes</a></li>
                 <li><a href="users.xhtml">Users</a></li>
                 <li><a href="resources.xhtml">Resources</a></li>
+                <li><a href="assignments.xhtml">Assignments</a></li>
+                <li><a href="permissions.xhtml">Permissions</a></li>
+                <li><a href="settings.xhtml">Settings</a></li>
             </ul>
         </div>
         <div id="content" class="left_content">

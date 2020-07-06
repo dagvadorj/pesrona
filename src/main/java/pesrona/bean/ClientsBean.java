@@ -12,6 +12,7 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.hibernate.Session;
 import pesrona.HibernateUtil;
+import pesrona.model.Client;
 import pesrona.model.Role;
 
 /**
@@ -20,21 +21,21 @@ import pesrona.model.Role;
  */
 @Named
 @ViewScoped
-public class RolesBean implements Serializable {
+public class ClientsBean implements Serializable {
 
-    private List<Role> roles;
+    private List<Client> clients;
 
     @PostConstruct
     public void init() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        roles = session.createQuery("select o from Role o").getResultList();
+        clients = session.createQuery("select o from Client o").getResultList();
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public List<Client> getClients() {
+        return clients;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setRoles(List<Client> clients) {
+        this.clients = clients;
     }
 }

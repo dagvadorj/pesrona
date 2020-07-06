@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="./template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+
+        <h:form>
+            <h:selectOneMenu value="#{assignmentsNewBean.roleId}">
+                <f:selectItems value="#{assignmentsNewBean.roles}" var="role"
+                               itemValue="#{role.id}" itemLabel="#{role.name}" />
+            </h:selectOneMenu>
+            <h:selectOneMenu value="#{assignmentsNewBean.userId}">
+                <f:selectItems value="#{assignmentsNewBean.users}" var="user"
+                               itemValue="#{user.id}" itemLabel="#{user.name}" />
+            </h:selectOneMenu>
+            <h:commandButton value="Save" action="#{assignmentsNewBean.save()}" />
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

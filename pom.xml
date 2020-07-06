@@ -33,6 +33,11 @@
             <artifactId>h2</artifactId>
             <version>1.4.200</version>
         </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>8.0</version>
+        </dependency>
     </dependencies>
     
     <build>

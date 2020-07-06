@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="./template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+
+        <h:form>
+            
+            <h:commandLink value="New scope" action="scopes_new" />
+            
+            <h:dataTable value="#{scopesBean.scopes}" var="scope" width="100%">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Client" />
+                    </f:facet>
+                    <h:outputText value="#{scope.client.name}" />
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{scope.id}" />
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{scope.name}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="./template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+
+        <h:form>
+            
+            <h:commandLink value="New assignment" action="assignments_new" />
+            
+            <h:dataTable value="#{assignmentsBean.assignments}" var="assignment" width="100%">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Role" />
+                    </f:facet>
+                    <h:outputText value="#{assignment.role.name}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="User" />
+                    </f:facet>
+                    <h:outputText value="#{assignment.user.name}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

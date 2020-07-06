@@ -14,5 +14,12 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.archive.autodetection">class</property>
         <mapping class="pesrona.model.Role" />
+        <mapping class="pesrona.model.User" />
+        <mapping class="pesrona.model.Client" />
+        <mapping class="pesrona.model.Permission" />
+        <mapping class="pesrona.model.Resource" />
+        <mapping class="pesrona.model.Scope" />
+        <mapping class="pesrona.model.Assignment" />
+        <mapping class="pesrona.model.Setting" />
     </session-factory>
 </hibernate-configuration>

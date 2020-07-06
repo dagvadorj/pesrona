@@ -55,6 +55,20 @@ public class Resource implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * @return the code
+     */
+    public String getCode() {
+        return code;
+    }
+
+    /**
+     * @param code the code to set
+     */
+    public void setCode(String code) {
+        this.code = code;
+    }
     
     
 }

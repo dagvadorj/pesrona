@@ -69,6 +69,62 @@ public class Permission implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * @return the client
+     */
+    public Client getClient() {
+        return client;
+    }
+
+    /**
+     * @param client the client to set
+     */
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    /**
+     * @return the role
+     */
+    public Role getRole() {
+        return role;
+    }
+
+    /**
+     * @param role the role to set
+     */
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    /**
+     * @return the scope
+     */
+    public Scope getScope() {
+        return scope;
+    }
+
+    /**
+     * @param scope the scope to set
+     */
+    public void setScope(Scope scope) {
+        this.scope = scope;
+    }
+
+    /**
+     * @return the expiryDate
+     */
+    public Date getExpiryDate() {
+        return expiryDate;
+    }
+
+    /**
+     * @param expiryDate the expiryDate to set
+     */
+    public void setExpiryDate(Date expiryDate) {
+        this.expiryDate = expiryDate;
+    }
     
     
 }
