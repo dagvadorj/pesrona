@@ -27,9 +27,7 @@ public class Permission implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    
-    private String name;
-    
+
     @ManyToOne
     private Client client;
     
@@ -54,20 +52,6 @@ public class Permission implements Serializable {
      */
     public void setId(Long id) {
         this.id = id;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 
     /**

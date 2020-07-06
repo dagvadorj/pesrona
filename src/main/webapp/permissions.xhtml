@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="./template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+
+        <h:form>
+            
+            <h:commandLink value="New permission" action="permissions_new" />
+            
+            <h:dataTable value="#{permissionsBean.permissions}" var="permission" width="100%">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Role" />
+                    </f:facet>
+                    <h:outputText value="#{permission.role.name}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Client" />
+                    </f:facet>
+                    <h:outputText value="#{permission.client.name}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Scope" />
+                    </f:facet>
+                    <h:outputText value="#{permission.scope.name}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
