@@ -3,24 +3,41 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 template="./template.xhtml"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
 
         <h:form>
-            <h:selectOneMenu value="#{assignmentsNewBean.roleId}">
-                <f:selectItems value="#{assignmentsNewBean.roles}" var="role"
-                               itemValue="#{role.id}" itemLabel="#{role.name}" />
-            </h:selectOneMenu>
-            <h:selectOneMenu value="#{assignmentsNewBean.userId}">
-                <f:selectItems value="#{assignmentsNewBean.users}" var="user"
-                               itemValue="#{user.id}" itemLabel="#{user.name}" />
-            </h:selectOneMenu>
-            <h:selectOneMenu value="#{assignmentsNewBean.userId}">
-                <f:selectItems value="#{assignmentsNewBean.resources}" var="resource"
-                               itemValue="#{resource.id}" itemLabel="#{resource.name}" />
-            </h:selectOneMenu>
-            <h:commandButton value="Save" action="#{assignmentsNewBean.save()}" />
+            
+            <h1>New Assignment</h1>
+            
+            <h:panelGrid columns="2">
+                
+                <h:outputText value="User" />
+                <h:selectOneMenu value="#{assignmentsNewBean.username}">
+                    <f:selectItems value="#{assignmentsNewBean.users}" var="user"
+                                   itemValue="#{user.username}" itemLabel="#{user.name}" />
+                </h:selectOneMenu>
+                
+                <h:outputText value="Role" />
+                <h:selectOneMenu value="#{assignmentsNewBean.roleId}">
+                    <f:selectItems value="#{assignmentsNewBean.roles}" var="role"
+                                   itemValue="#{role.id}" itemLabel="#{role.name}" />
+                </h:selectOneMenu>
+                
+                <h:outputText value="Resource" />
+                <h:selectOneMenu value="#{assignmentsNewBean.resourceCode}">
+                    <f:selectItems value="#{assignmentsNewBean.resources}" var="r"
+                                   itemValue="#{r.code}" itemLabel="#{r.name}" />
+                </h:selectOneMenu>
+                
+                <p:spacer />
+                <h:commandButton value="Save" action="#{assignmentsNewBean.save()}" />
+                
+            </h:panelGrid>
+            
+            
         </h:form>
 
     </ui:define>

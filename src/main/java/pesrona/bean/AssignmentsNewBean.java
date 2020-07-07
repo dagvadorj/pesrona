@@ -25,27 +25,44 @@ public class AssignmentsNewBean implements Serializable {
     private Session session;
     
     private Long roleId;
-    private Long userId;
-    private Long resourceId;
+    private String username;
+    private String resourceCode;
     private List<Client> roles;
     private List<User> users;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getResourceCode() {
+        return resourceCode;
+    }
+
+    public void setResourceCode(String resourceCode) {
+        this.resourceCode = resourceCode;
+    }
     private List<Resource> resources;
 
     @PostConstruct
     public void init() {
-        setSession(HibernateUtil.getSessionFactory().openSession());
-        setRoles((List<Client>) getSession().createQuery("select o from Role o").getResultList());
-        setUsers((List<User>) getSession().createQuery("select o from User o").getResultList());
+        session = HibernateUtil.getSessionFactory().openSession();
+        setRoles((List<Client>) session.createQuery("select o from Role o").getResultList());
+        setUsers((List<User>) session.createQuery("select o from User o").getResultList());
         resources = session.createQuery("select o from Resource o").getResultList();
     }
 
     public String save() {
 
-        Transaction transaction = getSession().beginTransaction();
+        Transaction transaction = session.beginTransaction();
         Assignment assignment = new Assignment();
         assignment.setRole(session.get(Role.class, roleId));
-        assignment.setUser(session.get(User.class, userId));
-        getSession().save(assignment);
+        assignment.setUser(session.get(User.class, username));
+        assignment.setResource(session.get(Resource.class, resourceCode));
+        session.save(assignment);
         transaction.commit();
         return "assignments";
     }
@@ -69,34 +86,6 @@ public class AssignmentsNewBean implements Serializable {
      */
     public void setRoleId(Long roleId) {
         this.roleId = roleId;
-    }
-
-    /**
-     * @return the session
-     */
-    public Session getSession() {
-        return session;
-    }
-
-    /**
-     * @param session the session to set
-     */
-    public void setSession(Session session) {
-        this.session = session;
-    }
-
-    /**
-     * @return the userId
-     */
-    public Long getUserId() {
-        return userId;
-    }
-
-    /**
-     * @param userId the userId to set
-     */
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     /**
@@ -125,20 +114,6 @@ public class AssignmentsNewBean implements Serializable {
      */
     public void setUsers(List<User> users) {
         this.users = users;
-    }
-
-    /**
-     * @return the resourceId
-     */
-    public Long getResourceId() {
-        return resourceId;
-    }
-
-    /**
-     * @param resourceId the resourceId to set
-     */
-    public void setResourceId(Long resourceId) {
-        this.resourceId = resourceId;
     }
 
     /**

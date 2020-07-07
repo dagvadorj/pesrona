@@ -3,24 +3,35 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 template="./template.xhtml"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
 
+        <h1>New Permission</h1>
+        
         <h:form>
             <h:panelGrid columns="2">
+                
+                <h:outputText value="Role" />
                 <h:selectOneMenu value="#{permissionsNewBean.roleId}">
                     <f:selectItems value="#{permissionsNewBean.roles}" var="role"
                                    itemValue="#{role.id}" itemLabel="#{role.name}" />
                 </h:selectOneMenu>
+                
+                <h:outputText value="Client" />
                 <h:selectOneMenu value="#{permissionsNewBean.clientId}">
                     <f:selectItems value="#{permissionsNewBean.clients}" var="client"
                                    itemValue="#{client.id}" itemLabel="#{client.name}" />
                 </h:selectOneMenu>
-                <h:selectOneMenu value="#{permissionsNewBean.scopeId}">
+                
+                <h:outputText value="Scope" />
+                <h:selectOneMenu value="#{permissionsNewBean.scopeCode}">
                     <f:selectItems value="#{permissionsNewBean.scopes}" var="scope"
-                                   itemValue="#{scope.id}" itemLabel="#{scope.name}" />
+                                   itemValue="#{scope.code}" itemLabel="#{scope.name}" />
                 </h:selectOneMenu>
+                
+                <p:spacer />
                 <h:commandButton value="Save" action="#{permissionsNewBean.save()}" />
             </h:panelGrid>
         </h:form>

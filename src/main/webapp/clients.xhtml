@@ -2,22 +2,26 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                template="./template.xhtml">
+                template="./template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
 
         <h:form>
-            
-            <h:commandLink value="New client" action="clients_new" />
-            
-            <h:dataTable value="#{clientsBean.clients}" var="client">
-                <h:column>
-                    <h:outputText value="#{client.id}" />
-                </h:column>
-                <h:column>
+
+            <h1>Clients</h1>
+
+            <h:commandLink value="New Client" action="clients_new" />
+
+            <p:dataTable value="#{clientsBean.clients}" var="client">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Name" />
+                    </f:facet>
                     <h:outputText value="#{client.name}" />
-                </h:column>
-            </h:dataTable>
+                </p:column>
+            </p:dataTable>
         </h:form>
 
     </ui:define>

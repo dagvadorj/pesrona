@@ -22,9 +22,6 @@ import javax.persistence.Table;
 public class Scope implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
-    
     private String code;
     
     private String name;
@@ -33,20 +30,6 @@ public class Scope implements Serializable {
     private Client client;
     
     private Boolean active;
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     /**
      * @return the name

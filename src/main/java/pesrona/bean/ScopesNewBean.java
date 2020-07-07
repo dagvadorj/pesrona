@@ -14,7 +14,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pesrona.HibernateUtil;
 import pesrona.model.Client;
-import pesrona.model.Role;
 import pesrona.model.Scope;
 
 /**
@@ -27,6 +26,15 @@ public class ScopesNewBean implements Serializable {
 
     private Session session;
     
+    private String code;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
     private String name;
     private Long clientId;
     private List<Client> clients;
@@ -41,6 +49,7 @@ public class ScopesNewBean implements Serializable {
 
         Transaction transaction = session.beginTransaction();
         Scope scope = new Scope();
+        scope.setCode(code);
         scope.setName(name);
         scope.setClient(session.get(Client.class, clientId));
         session.save(scope);

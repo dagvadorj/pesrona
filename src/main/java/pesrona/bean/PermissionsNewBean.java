@@ -8,11 +8,10 @@ import javax.faces.view.ViewScoped;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pesrona.HibernateUtil;
-import pesrona.model.Assignment;
 import pesrona.model.Client;
+import pesrona.model.Permission;
 import pesrona.model.Role;
 import pesrona.model.Scope;
-import pesrona.model.User;
 
 /**
  *
@@ -26,8 +25,16 @@ public class PermissionsNewBean implements Serializable {
     
     private Long roleId;
     private Long clientId;
-    private Long scopeId;
+    private String scopeCode;
     private List<Role> roles;
+
+    public String getScopeCode() {
+        return scopeCode;
+    }
+
+    public void setScopeCode(String scopeCode) {
+        this.scopeCode = scopeCode;
+    }
     private List<Client> clients;
     private List<Scope> scopes;
 
@@ -42,10 +49,11 @@ public class PermissionsNewBean implements Serializable {
     public String save() {
 
         Transaction transaction = session.beginTransaction();
-        Assignment assignment = new Assignment();
-        assignment.setRole(session.get(Role.class, getRoleId()));
-        assignment.setUser(session.get(User.class, getClientId()));
-        session.save(assignment);
+        Permission permission = new Permission();
+        permission.setRole(session.get(Role.class, roleId));
+        permission.setClient(session.get(Client.class, clientId));
+        permission.setScope(session.get(Scope.class, scopeCode));
+        session.save(permission);
         transaction.commit();
         return "permissions";
     }
@@ -76,20 +84,6 @@ public class PermissionsNewBean implements Serializable {
      */
     public void setClientId(Long clientId) {
         this.clientId = clientId;
-    }
-
-    /**
-     * @return the scopeId
-     */
-    public Long getScopeId() {
-        return scopeId;
-    }
-
-    /**
-     * @param scopeId the scopeId to set
-     */
-    public void setScopeId(Long scopeId) {
-        this.scopeId = scopeId;
     }
 
     /**

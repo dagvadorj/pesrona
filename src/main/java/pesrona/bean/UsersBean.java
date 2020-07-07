@@ -24,7 +24,7 @@ public class UsersBean implements Serializable {
     @PostConstruct
     public void init() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        setUsers((List<User>) session.createQuery("select o from User o").getResultList());
+        users = session.createQuery("select o from User o").getResultList();
     }
 
     /**

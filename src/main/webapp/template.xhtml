@@ -10,25 +10,42 @@
         <h:outputStylesheet name="#{request.contextPath}/css/default.css"/>
         <h:outputStylesheet name="#{request.contextPath}/css/cssLayout.css"/>
         <title>Pesrona</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <style type="text/css">
+            body {
+                margin-top: 1em;
+                margin-bottom: 1em;
+            }
+        </style>
     </h:head>
 
     <h:body>
 
-        <div id="left">
-            <ul>
-                <li><a href="roles.xhtml">Roles</a></li>
-                <li><a href="clients.xhtml">Clients</a></li>
-                <li><a href="scopes.xhtml">Scopes</a></li>
-                <li><a href="users.xhtml">Users</a></li>
-                <li><a href="resources.xhtml">Resources</a></li>
-                <li><a href="assignments.xhtml">Assignments</a></li>
-                <li><a href="permissions.xhtml">Permissions</a></li>
-                <li><a href="settings.xhtml">Settings</a></li>
-            </ul>
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <ul>
+                        <li><a href="#{request.contextPath}/pages/roles.xhtml">Roles</a></li>
+                        <li><a href="#{request.contextPath}/pages/clients.xhtml">Clients</a></li>
+                        <li><a href="#{request.contextPath}/pages/scopes.xhtml">Scopes</a></li>
+                        <li><a href="#{request.contextPath}/pages/users.xhtml">Users</a></li>
+                        <li><a href="#{request.contextPath}/pages/resources.xhtml">Resources</a></li>
+                        <li><a href="#{request.contextPath}/pages/assignments.xhtml">Assignments</a></li>
+                        <li><a href="#{request.contextPath}/pages/permissions.xhtml">Permissions</a></li>
+                        <li><a href="#{request.contextPath}/pages/settings.xhtml">Settings</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-9">
+                    <ui:insert name="content">Content</ui:insert>
+                </div>
+            </div>
+            
         </div>
-        <div id="content" class="left_content">
-            <ui:insert name="content">Content</ui:insert>
-        </div>
+
 
     </h:body>
 

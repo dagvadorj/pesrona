@@ -2,22 +2,26 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                template="./template.xhtml">
+                template="./template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
 
         <h:form>
+
+            <h1>Roles</h1>
             
-            <h:commandLink value="New role" action="roles_new" />
+            <h:commandLink value="New Role" action="roles_new" />
             
-            <h:dataTable value="#{rolesBean.roles}" var="role">
-                <h:column>
-                    <h:outputText value="#{role.id}" />
-                </h:column>
-                <h:column>
+            <p:dataTable value="#{rolesBean.roles}" var="role">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Name" />
+                    </f:facet>
                     <h:outputText value="#{role.name}" />
-                </h:column>
-            </h:dataTable>
+                </p:column>
+            </p:dataTable>
         </h:form>
 
     </ui:define>

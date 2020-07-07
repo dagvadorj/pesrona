@@ -3,17 +3,32 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 template="./template.xhtml"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
 
         <h:form>
-            <h:inputText value="#{scopesNewBean.name}" label="Name" />
-            <h:selectOneMenu value="#{scopesNewBean.clientId}">
-                <f:selectItems value="#{scopesNewBean.clients}" var="client"
-                               itemValue="#{client.id}" itemLabel="#{client.name}" />
-            </h:selectOneMenu>
-            <h:commandButton value="Save" action="#{scopesNewBean.save()}" />
+            
+            <h1>New Scope</h1>
+            
+            <h:panelGrid columns="2">
+                
+                <h:outputText value="Code" />
+                <h:inputText value="#{scopesNewBean.code}" />
+                
+                <h:outputText value="Name" />
+                <h:inputText value="#{scopesNewBean.name}" label="Name" />
+                
+                <h:outputText value="Client Name" />
+                <h:selectOneMenu value="#{scopesNewBean.clientId}">
+                    <f:selectItems value="#{scopesNewBean.clients}" var="client"
+                                   itemValue="#{client.id}" itemLabel="#{client.name}" />
+                </h:selectOneMenu>
+                
+                <p:spacer />
+                <h:commandButton value="Save" action="#{scopesNewBean.save()}" />
+            </h:panelGrid>
         </h:form>
 
     </ui:define>

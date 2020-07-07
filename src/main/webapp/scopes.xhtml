@@ -3,28 +3,37 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 template="./template.xhtml"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
 
         <h:form>
             
-            <h:commandLink value="New scope" action="scopes_new" />
+            <h1>Scopes</h1>
             
-            <h:dataTable value="#{scopesBean.scopes}" var="scope" width="100%">
-                <h:column>
+            <h:commandLink value="New Scope" action="scopes_new" />
+            
+            <p:dataTable value="#{scopesBean.scopes}" var="scope">
+                <p:column style="text-align: left; ">
                     <f:facet name="header">
                         <h:outputText value="Client" />
                     </f:facet>
                     <h:outputText value="#{scope.client.name}" />
-                </h:column>
-                <h:column>
-                    <h:outputText value="#{scope.id}" />
-                </h:column>
-                <h:column>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Code" />
+                    </f:facet>
+                    <h:outputText value="#{scope.code}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Name" />
+                    </f:facet>
                     <h:outputText value="#{scope.name}" />
-                </h:column>
-            </h:dataTable>
+                </p:column>
+            </p:dataTable>
         </h:form>
 
     </ui:define>

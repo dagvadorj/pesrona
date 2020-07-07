@@ -6,15 +6,12 @@
 package pesrona.bean;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pesrona.HibernateUtil;
-import pesrona.model.Client;
-import pesrona.model.Role;
 import pesrona.model.User;
 
 /**
@@ -25,7 +22,10 @@ import pesrona.model.User;
 @ViewScoped
 public class UsersNewBean implements Serializable {
 
+    private String type;
     private String name;
+    private String username;
+    private String email;
 
     @PostConstruct
     public void init() {
@@ -38,6 +38,9 @@ public class UsersNewBean implements Serializable {
             Transaction transaction = session.beginTransaction();
             User user = new User();
             user.setName(name);
+            user.setUsername(username);
+            user.setType(type);
+            user.setEmail(email);
             session.save(user);
             transaction.commit();
             return "users";
@@ -53,6 +56,48 @@ public class UsersNewBean implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }

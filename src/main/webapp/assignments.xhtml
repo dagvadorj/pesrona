@@ -3,28 +3,37 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 template="./template.xhtml"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
 
         <h:form>
-            
-            <h:commandLink value="New assignment" action="assignments_new" />
-            
-            <h:dataTable value="#{assignmentsBean.assignments}" var="assignment" width="100%">
-                <h:column>
+
+            <h1>Assignments</h1>
+
+            <h:commandLink value="New Assignment" action="assignments_new" />
+
+            <p:dataTable value="#{assignmentsBean.assignments}" var="assignment">
+                <p:column>
                     <f:facet name="header">
                         <h:outputText value="Role" />
                     </f:facet>
                     <h:outputText value="#{assignment.role.name}" />
-                </h:column>
-                <h:column>
+                </p:column>
+                <p:column>
                     <f:facet name="header">
                         <h:outputText value="User" />
                     </f:facet>
                     <h:outputText value="#{assignment.user.name}" />
-                </h:column>
-            </h:dataTable>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Resource" />
+                    </f:facet>
+                    <h:outputText value="#{assignment.resource.name}" />
+                </p:column>
+            </p:dataTable>
         </h:form>
 
     </ui:define>

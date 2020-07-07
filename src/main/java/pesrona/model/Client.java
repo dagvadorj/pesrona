@@ -25,6 +25,16 @@ public class Client implements Serializable {
     private Long id;
     
     private String name;
+    
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     /**
      * @return the id
