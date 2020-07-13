@@ -15,7 +15,11 @@
         <h:form>
             <p:panelGrid columns="2" layout="grid">
                 <h:outputText value="Role Name" />
-                <h:inputText value="#{rolesNewBean.name}" required="true" requiredMessage="Role name is required!" />
+                <h:panelGroup>
+                    <div class="form-group">
+                        <h:inputText value="#{rolesNewBean.name}" class="form-control" required="true" requiredMessage="Role name is required!" />
+                    </div>
+                </h:panelGroup>
                 <p:spacer />
                 <h:commandButton value="Save" action="#{rolesNewBean.save()}" class="btn btn-primary" />
             </p:panelGrid>

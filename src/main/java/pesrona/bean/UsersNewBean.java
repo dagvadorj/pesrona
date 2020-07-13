@@ -1,6 +1,8 @@
 package pesrona.bean;
 
+import com.google.common.hash.Hashing;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -21,6 +23,15 @@ public class UsersNewBean implements Serializable {
 
     private String name;
     private String username;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     private String email;
 
     @PostConstruct
@@ -37,6 +48,9 @@ public class UsersNewBean implements Serializable {
             user.setUsername(username);
             user.setType("normal");
             user.setEmail(email);
+            user.setPassword(Hashing.sha512().hashString(password, StandardCharsets.UTF_8).toString());
+            user.setActive(true);
+            user.setAdministrator(false);
             session.save(user);
             transaction.commit();
             return "users";

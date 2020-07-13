@@ -16,23 +16,24 @@
             <h:commandLink value="New Assignment" action="assignments_new" />
 
             <p:dataTable value="#{assignmentsBean.assignments}" var="assignment">
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Role" />
-                    </f:facet>
+                <p:column headerText="Role">
                     <h:outputText value="#{assignment.role.name}" />
                 </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="User" />
-                    </f:facet>
+                <p:column headerText="User">
                     <h:outputText value="#{assignment.user.name}" />
                 </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Resource" />
-                    </f:facet>
+                <p:column headerText="Resource">
+                    <h:outputText value="#{assignment.resource.code}" style="font-weight: bold; " /> - 
                     <h:outputText value="#{assignment.resource.name}" />
+                </p:column>
+                <p:column headerText="Expiry Date">
+                    <h:outputText value="#{assignment.expiryDate}">
+                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Expire">
+                    <h:outputText value="Expired" rendered="#{assignment.expired}" />
+                    <p:commandButton value="Expire" action="#{assignmentsBean.expire(assignment)}" rendered="#{not assignment.expired}" />
                 </p:column>
             </p:dataTable>
         </h:form>

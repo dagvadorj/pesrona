@@ -39,6 +39,7 @@ public class PermissionsNewBean implements Serializable {
         setRoles((List<Role>) session.createQuery("select o from Role o").getResultList());
         setClients((List<Client>) session.createQuery("select o from Client o").getResultList());
         setScopes((List<Scope>) session.createQuery("select o from Scope o").getResultList());
+        expiryDate = new Date();
     }
 
     public String save() {
@@ -48,6 +49,7 @@ public class PermissionsNewBean implements Serializable {
         permission.setRole(session.get(Role.class, roleId));
         permission.setClient(session.get(Client.class, clientId));
         permission.setScope(session.get(Scope.class, scopeCode));
+        permission.setExpiryDate(expiryDate);
         session.save(permission);
         transaction.commit();
         return "permissions";

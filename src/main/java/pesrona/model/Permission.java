@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 /**
@@ -40,7 +41,25 @@ public class Permission implements Serializable {
     private Scope scope;
 
     @Temporal(TemporalType.DATE)
+    private Date createdDate;
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+    
+    @Temporal(TemporalType.DATE)
     private Date expiryDate;
+
+    @Transient
+    private Boolean expired;
+
+    public Boolean getExpired() {
+        return expiryDate != null && expiryDate.before(new Date());
+    }
 
     /**
      * @return the id

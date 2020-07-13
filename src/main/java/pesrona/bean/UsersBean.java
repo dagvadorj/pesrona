@@ -133,6 +133,8 @@ public class UsersBean implements Serializable {
 
             session.getTransaction().commit();
 
+            users = session.createQuery("select o from User o").getResultList();
+
         } catch (NamingException e) {
             if (e.getMessage() == null) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown error"));

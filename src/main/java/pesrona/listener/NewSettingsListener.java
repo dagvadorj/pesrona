@@ -109,20 +109,8 @@ public class NewSettingsListener implements ServletContextListener {
             session.getTransaction().commit();
         }
         
-        List<User> users = session.createQuery("select o from User o").getResultList();
-        if (users.isEmpty()) {
-            
-            session.getTransaction().begin();
-            User user = new User();
-            user.setUsername("admin");
-            user.setPassword(Hashing.sha512().hashString("admin", StandardCharsets.UTF_8).toString());
-            user.setName("Admin");
-            user.setType("normal");
-            user.setActive(true);
-            user.setAdministrator(true);
-            session.save(user);
-            session.getTransaction().commit();
-        }
+        session.close();
+        
     }
 
     @Override

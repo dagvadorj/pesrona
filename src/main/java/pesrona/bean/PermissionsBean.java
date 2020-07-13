@@ -28,10 +28,10 @@ public class PermissionsBean implements Serializable {
         permissions = session.createQuery("select o from Permission o").getResultList();
     }
 
-    public void expire(Assignment assignment) {
+    public void expire(Permission permission) {
         session.getTransaction().begin();
-        assignment.setExpiryDate(new Date());
-        session.save(assignment);
+        permission.setExpiryDate(new Date());
+        session.save(permission);
         session.getTransaction().commit();
     }
     

@@ -10,25 +10,39 @@
     <ui:define name="left">
         <h1>New User</h1>
     </ui:define>
-    
+
     <ui:define name="content">
 
         <h:form>
 
-            <h:panelGrid columns="2">
+            <p:panelGrid columns="2" layout="grid">
 
                 <h:outputText value="Username" />
-                <h:inputText value="#{usersNewBean.username}" />
+
+                <h:panelGroup>
+                    <div class="form-group">
+                        <h:inputText value="#{usersNewBean.username}" class="form-control" required="true" requiredMessage="Username is required!" />
+                    </div>
+                </h:panelGroup>
 
                 <h:outputText value="E-mail" />
-                <h:inputText value="#{usersNewBean.email}" />
+
+                <h:panelGroup>
+                    <div class="form-group">
+                        <h:inputText value="#{usersNewBean.email}" class="form-control" required="true" requiredMessage="E-mail is required!" />
+                    </div>
+                </h:panelGroup>
 
                 <h:outputText value="Name" />
-                <h:inputText value="#{usersNewBean.name}" />
+                <h:panelGroup>
+                    <div class="form-group">
+                        <h:inputText value="#{usersNewBean.name}" class="form-control" required="true" requiredMessage="Name is required!" />
+                    </div>
+                </h:panelGroup>
 
                 <p:spacer />
-                <h:commandButton value="Save" action="#{usersNewBean.save()}" />
-            </h:panelGrid>
+                <h:commandButton value="Save" action="#{usersNewBean.save()}" class="btn btn-primary" />
+            </p:panelGrid>
         </h:form>
 
     </ui:define>

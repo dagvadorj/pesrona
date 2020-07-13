@@ -33,7 +33,10 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-2">
+                    <h:form>
+                        <h:commandLink value="Sign Out" action="#{logoutBean.logout()}" />
+                    </h:form>
                     <ul>
                         <li><a href="#{request.contextPath}/pages/roles.xhtml">Roles</a></li>
                         <li><a href="#{request.contextPath}/pages/users.xhtml">Users</a></li>
@@ -50,7 +53,7 @@
                         <li><a href="#{request.contextPath}/pages/settings.xhtml">Permissions Report</a></li>
                     </ul>
                 </div>
-                <div class="col-sm-9">
+                <div class="col-sm-10">
 
                     <h:messages />
 

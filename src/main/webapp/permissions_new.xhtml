@@ -33,7 +33,9 @@
                 </h:selectOneMenu>
                 
                 <h:outputText value="Expiry Date" />
-                <p:datePicker value="#{permissionsNewBean.expiryDate}" required="true" requiredMessage="Expiry date is required!" />
+                <p:datePicker value="#{permissionsNewBean.expiryDate}" required="true" requiredMessage="Expiry date is required!" pattern="yyyy-MM-dd">
+                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                </p:datePicker>
 
                 <p:spacer />
                 <h:commandButton value="Save" action="#{permissionsNewBean.save()}" />

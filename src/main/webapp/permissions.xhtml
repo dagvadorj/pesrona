@@ -16,29 +16,23 @@
             <h:commandLink value="New Permission" action="permissions_new" />
 
             <p:dataTable value="#{permissionsBean.permissions}" var="permission">
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Role" />
-                    </f:facet>
+                <p:column headerText="Role">
                     <h:outputText value="#{permission.role.name}" />
                 </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Client" />
-                    </f:facet>
+                <p:column headerText="Client">
                     <h:outputText value="#{permission.client.name}" />
                 </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Scope" />
-                    </f:facet>
+                <p:column headerText="Scope">
                     <h:outputText value="#{permission.scope.name}" />
                 </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Expiry Date" />
-                    </f:facet>
-                    <h:outputText value="#{permission.expiryDate}" />
+                <p:column headerText="Expiry Date">
+                    <h:outputText value="#{permission.expiryDate}">
+                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Expire">
+                    <h:outputText value="Expired" rendered="#{permission.expired}" />
+                    <p:commandButton value="Expire" action="#{permissionsBean.expire(permission)}" rendered="#{not permission.expired}" />
                 </p:column>
             </p:dataTable>
         </h:form>
