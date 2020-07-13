@@ -39,6 +39,13 @@
                         <h:inputText value="#{usersNewBean.name}" class="form-control" required="true" requiredMessage="Name is required!" />
                     </div>
                 </h:panelGroup>
+                
+                <h:outputText value="Password" />
+                <h:panelGroup>
+                    <div class="form-group">
+                        <h:inputSecret value="#{usersNewBean.password}" class="form-control" required="true" requiredMessage="Password is required!" />
+                    </div>
+                </h:panelGroup>
 
                 <p:spacer />
                 <h:commandButton value="Save" action="#{usersNewBean.save()}" class="btn btn-primary" />
