@@ -10,7 +10,7 @@
     <ui:define name="left">
         <h1>Edit User</h1>
     </ui:define>
-    
+
     <ui:define name="right">
         <h:form>
             <h:commandButton value="Delete" action="#{usersEditBean.remove()}" class="btn btn-danger" onclick="if (confirm('Are you sure?') === false) {
@@ -19,22 +19,41 @@
                              " />
         </h:form>
     </ui:define>
-    
+
     <ui:define name="content">
 
         <h:form>
 
-            <h:panelGrid columns="2">
+            <p:panelGrid columns="2" layout="grid">
 
+                <h:outputText value="Username" />
+                <h:outputText value="#{usersEditBean.user.username}" />
+                
                 <h:outputText value="E-mail" />
-                <h:inputText value="#{usersEditBean.user.email}" />
+
+                <h:panelGroup>
+                    <div class="form-group">
+                        <h:inputText value="#{usersEditBean.user.email}" class="form-control" required="true" requiredMessage="E-mail is required!" />
+                    </div>
+                </h:panelGroup>
 
                 <h:outputText value="Name" />
-                <h:inputText value="#{usersEditBean.user.name}" />
+                <h:panelGroup>
+                    <div class="form-group">
+                        <h:inputText value="#{usersEditBean.user.name}" class="form-control" required="true" requiredMessage="Name is required!" />
+                    </div>
+                </h:panelGroup>
+
+                <h:outputText value="Password" />
+                <h:panelGroup>
+                    <div class="form-group">
+                        <h:inputSecret value="#{usersEditBean.password}" class="form-control" />
+                    </div>
+                </h:panelGroup>
 
                 <p:spacer />
                 <h:commandButton value="Save" action="#{usersEditBean.save()}" class="btn btn-primary" />
-            </h:panelGrid>
+            </p:panelGrid>
         </h:form>
 
     </ui:define>

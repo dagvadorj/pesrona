@@ -6,21 +6,27 @@
                 template="./template.xhtml"
                 xmlns:p="http://primefaces.org/ui">
 
+    <ui:define name="left">
+        <h1>New Client</h1>
+    </ui:define>
+
     <ui:define name="content">
 
         <h:form>
 
-            <h1>New Client</h1>
-
-            <h:panelGrid columns="2">
+            <p:panelGrid columns="2" layout="grid">
 
                 <h:outputText value="Client Name" />
-                <h:inputText value="#{clientsNewBean.name}" />
+                <h:panelGroup>
+                    <div class="form-group">
+                        <h:inputText value="#{clientsNewBean.name}" class="form-control" required="true" requiredMessage="Name is required!" />
+                    </div>
+                </h:panelGroup>
 
                 <p:spacer />
-                <h:commandButton value="Save" action="#{clientsNewBean.save()}" />
+                <h:commandButton value="Save" action="#{clientsNewBean.save()}" class="btn btn-primary" />
 
-            </h:panelGrid>
+            </p:panelGrid>
 
         </h:form>
 

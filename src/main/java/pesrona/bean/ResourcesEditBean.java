@@ -1,8 +1,6 @@
 package pesrona.bean;
 
-import com.google.common.hash.Hashing;
 import java.io.Serializable;
-import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -12,7 +10,7 @@ import javax.faces.view.ViewScoped;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pesrona.HibernateUtil;
-import pesrona.model.User;
+import pesrona.model.Resource;
 
 /**
  *
@@ -20,18 +18,17 @@ import pesrona.model.User;
  */
 @Named
 @ViewScoped
-public class UsersEditBean implements Serializable {
+public class ResourcesEditBean implements Serializable {
 
     private Session session;
-    private User user;
-    private String password;
+    private Resource resource;
 
-    public String getPassword() {
-        return password;
+    public Resource getResource() {
+        return resource;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setResource(Resource resource) {
+        this.resource = resource;
     }
 
     @PostConstruct
@@ -39,20 +36,17 @@ public class UsersEditBean implements Serializable {
         session = HibernateUtil.getSessionFactory().openSession();
         FacesContext facesContext = FacesContext.getCurrentInstance();
         Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
-        String username = params.get("username");
-        user = session.get(User.class, username);
+        String resourceCode = params.get("resourceCode");
+        resource = session.get(Resource.class, resourceCode);
     }
 
     public String save() {
 
         try {
             Transaction transaction = session.beginTransaction();
-            if (password != null && password.trim().length() > 0) {
-                user.setPassword(Hashing.sha512().hashString(password, StandardCharsets.UTF_8).toString());
-            }
-            session.save(user);
+            session.save(resource);
             transaction.commit();
-            return "users";
+            return "resources";
         } catch (Exception e) {
             if (e.getMessage() == null) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown error"));
@@ -67,9 +61,9 @@ public class UsersEditBean implements Serializable {
 
         try {
             Transaction transaction = session.beginTransaction();
-            session.delete(user);
+            session.delete(resource);
             transaction.commit();
-            return "users";
+            return "resources";
         } catch (Exception e) {
             if (e.getMessage() == null) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown error"));
@@ -79,12 +73,5 @@ public class UsersEditBean implements Serializable {
         }
         return null;
     }
-    
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

@@ -7,25 +7,30 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+    <ui:define name="left">
+        <h1>Resources</h1>
+    </ui:define>
+    
+    <ui:define name="right">
+        <h:form>
+            <h:commandLink value="New Resource" action="resources_new" />
+        </h:form>
+    </ui:define>
+    
     <ui:define name="content">
 
         <h:form>
 
-            <h1>Resources</h1>
-
-            <h:commandLink value="New Resource" action="resources_new" />
-
             <p:dataTable value="#{resourcesBean.resources}" var="r">
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Code" />
-                    </f:facet>
+                <p:column width="100">
+                    <h:commandLink value="Edit" action="resources_edit">
+                        <f:param name="resourceCode" value="#{r.code}" />
+                    </h:commandLink>
+                </p:column>
+                <p:column headerText="URN">
                     <h:outputText value="#{r.code}" />
                 </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Name" />
-                    </f:facet>
+                <p:column headerText="Name">
                     <h:outputText value="#{r.name}" />
                 </p:column>
             </p:dataTable>

@@ -7,29 +7,44 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 
+    <ui:define name="left">
+        <h1>New Scope</h1>
+    </ui:define>
+    <ui:define name="right">
+    </ui:define>
     <ui:define name="content">
 
         <h:form>
 
-            <h1>New Scope</h1>
+            <p:panelGrid columns="2" layout="grid">
 
-            <h:panelGrid columns="2">
+                <h:outputText value="Client" />
+                <h:panelGroup>
+                    <div>
+                        <p:selectOneMenu value="#{scopesNewBean.clientId}" required="#{true}" requiredMessage="Client is required!">
+                            <f:selectItems value="#{scopesNewBean.clients}" var="client"
+                                           itemValue="#{client.id}" itemLabel="#{client.name}" />
+                        </p:selectOneMenu>
+                    </div>
+                </h:panelGroup>
 
                 <h:outputText value="Code" />
-                <h:inputText value="#{scopesNewBean.code}" />
+                <h:panelGroup>
+                    <div class="form-group">
+                        <h:inputText value="#{scopesNewBean.code}" class="form-control" required="#{true}" requiredMessage="Code is required!" />
+                    </div>
+                </h:panelGroup>
 
                 <h:outputText value="Name" />
-                <h:inputText value="#{scopesNewBean.name}" label="Name" />
-
-                <h:outputText value="Client Name" />
-                <h:selectOneMenu value="#{scopesNewBean.clientId}">
-                    <f:selectItems value="#{scopesNewBean.clients}" var="client"
-                                   itemValue="#{client.id}" itemLabel="#{client.name}" />
-                </h:selectOneMenu>
+                <h:panelGroup>
+                    <div class="form-group">
+                        <h:inputText value="#{scopesNewBean.name}" class="form-control" required="#{true}" requiredMessage="Name is required!" />
+                    </div>
+                </h:panelGroup>
 
                 <p:spacer />
-                <h:commandButton value="Save" action="#{scopesNewBean.save()}" />
-            </h:panelGrid>
+                <h:commandButton value="Save" action="#{scopesNewBean.save()}" class="btn btn-primary" />
+            </p:panelGrid>
         </h:form>
 
     </ui:define>

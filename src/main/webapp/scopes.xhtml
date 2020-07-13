@@ -7,31 +7,30 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 
+    <ui:define name="left">
+        <h1>Scopes</h1>
+    </ui:define>
+    <ui:define name="right">
+        <h:form>
+            <h:commandLink value="New Scope" action="scopes_new" />
+        </h:form>
+    </ui:define>
     <ui:define name="content">
 
         <h:form>
-
-            <h1>Scopes</h1>
-
-            <h:commandLink value="New Scope" action="scopes_new" />
-
             <p:dataTable value="#{scopesBean.scopes}" var="scope">
-                <p:column style="text-align: left; ">
-                    <f:facet name="header">
-                        <h:outputText value="Client" />
-                    </f:facet>
+                <p:column width="100">
+                    <h:commandLink value="Edit" action="scopes_edit">
+                        <f:param name="scopeCode" value="#{scope.code}" />
+                    </h:commandLink>
+                </p:column>
+                <p:column headerText="Client">
                     <h:outputText value="#{scope.client.name}" />
                 </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Code" />
-                    </f:facet>
+                <p:column headerText="Code">
                     <h:outputText value="#{scope.code}" />
                 </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Name" />
-                    </f:facet>
+                <p:column headerText="Name">
                     <h:outputText value="#{scope.name}" />
                 </p:column>
             </p:dataTable>

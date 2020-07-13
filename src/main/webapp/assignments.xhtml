@@ -7,14 +7,17 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 
+    <ui:define name="left">
+        <h1>Assignments</h1>
+    </ui:define>
+    <ui:define name="right">
+        <h:form>
+            <h:commandLink value="New Assignment" action="assignments_new" />
+        </h:form>
+    </ui:define>
     <ui:define name="content">
 
         <h:form>
-
-            <h1>Assignments</h1>
-
-            <h:commandLink value="New Assignment" action="assignments_new" />
-
             <p:dataTable value="#{assignmentsBean.assignments}" var="assignment">
                 <p:column headerText="Role">
                     <h:outputText value="#{assignment.role.name}" />

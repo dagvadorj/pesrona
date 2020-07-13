@@ -43,6 +43,11 @@ public class AuthenticationFilter implements Filter {
                 chain.doFilter(httpRequest, httpResponse);
                 return;
             }
+        } else {
+            if (httpRequest.getPathInfo().equals("/login.xhtml")) {
+                httpResponse.sendRedirect("index.xhtml");
+                return;
+            }
         }
 
         chain.doFilter(httpRequest, httpResponse);

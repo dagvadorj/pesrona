@@ -7,11 +7,11 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="left">
-        <h1>Edit Client</h1>
+        <h1>Edit Scope</h1>
     </ui:define>
     <ui:define name="right">
         <h:form>
-            <h:commandButton value="Delete" action="#{clientsEditBean.remove()}" class="btn btn-danger" onclick="if (confirm('Are you sure?') === false) {
+            <h:commandButton value="Delete" action="#{scopesEditBean.remove()}" class="btn btn-danger" onclick="if (confirm('Are you sure?') === false) {
                         return false;
                     }
                              " />
@@ -23,17 +23,20 @@
         <h:form>
 
             <p:panelGrid columns="2" layout="grid">
-
-                <h:outputText value="Client Name" />
+                
+                <h:outputText value="Code" />
+                <h:outputText value="#{scopesEditBean.scope.code}" />
+                
+                <h:outputText value="Name" />
 
                 <h:panelGroup>
                     <div class="form-group">
-                        <h:inputText value="#{clientsEditBean.client.name}" required="true" requiredMessage="Name is required" class="form-control" />
+                        <h:inputText value="#{scopesEditBean.scope.name}" required="true" requiredMessage="Name is required" class="form-control" />
                     </div>
                 </h:panelGroup>
 
                 <p:spacer />
-                <h:commandButton value="Update" action="#{clientsEditBean.save()}" class="btn btn-primary" />
+                <h:commandButton value="Update" action="#{scopesEditBean.save()}" class="btn btn-primary" />
             </p:panelGrid>
         </h:form>
 

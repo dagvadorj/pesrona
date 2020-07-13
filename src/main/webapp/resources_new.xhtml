@@ -6,23 +6,35 @@
                 template="./template.xhtml"
                 xmlns:p="http://primefaces.org/ui">
 
+    <ui:define name="left">
+        <h1>New Resource</h1>
+    </ui:define>
     <ui:define name="content">
 
-        <h1>New Resource</h1>
 
         <h:form>
-            <h:panelGrid columns="2">
+            <p:panelGrid columns="2" layout="grid">
 
-                <h:outputText value="Code" />
-                <h:inputText value="#{resourcesNewBean.code}" />
+                <h:outputText value="URN" />
+                
+                <h:panelGroup>
+                    <div class="form-group">
+                        <h:inputText value="#{resourcesNewBean.code}" class="form-control" required="true" requiredMessage="URN is required!" />
+                    </div>
+                </h:panelGroup>
 
                 <h:outputText value="Name" />
-                <h:inputText value="#{resourcesNewBean.name}" />
+                
+                <h:panelGroup>
+                    <div class="form-group">
+                        <h:inputText value="#{resourcesNewBean.name}" class="form-control" required="true" requiredMessage="Name is required!" />
+                    </div>
+                </h:panelGroup>
 
                 <p:spacer />
-                <h:commandButton value="Save" action="#{resourcesNewBean.save()}" />
+                <h:commandButton value="Save" action="#{resourcesNewBean.save()}" class="btn btn-primary" />
 
-            </h:panelGrid>
+            </p:panelGrid>
 
         </h:form>
 
