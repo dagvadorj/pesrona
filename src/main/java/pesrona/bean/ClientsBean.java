@@ -28,8 +28,10 @@ public class ClientsBean implements Serializable {
     }
 
     public void retokenize(Client client) {
+        session.getTransaction().begin();
         client.setToken(UUID.randomUUID().toString());
         session.save(client);
+        session.getTransaction().commit();
     }
     
     public List<Client> getClients() {

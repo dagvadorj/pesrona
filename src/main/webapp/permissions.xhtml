@@ -34,6 +34,12 @@
                     </f:facet>
                     <h:outputText value="#{permission.scope.name}" />
                 </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Expiry Date" />
+                    </f:facet>
+                    <h:outputText value="#{permission.expiryDate}" />
+                </p:column>
             </p:dataTable>
         </h:form>
 

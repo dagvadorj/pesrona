@@ -7,19 +7,30 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:define name="content">
-
+    <ui:define name="left">
+        <h1>Users</h1>
+    </ui:define>
+    
+    <ui:define name="right">
         <h:form>
-
-            <h1>Users</h1>
-
             <h:panelGrid columns="3">
                 <h:commandLink value="New User" action="users_new" />
                 <p:spacer width="30" />
                 <h:commandLink value="Sync" action="#{usersBean.sync()}" />
             </h:panelGrid>
+        </h:form>
+    </ui:define>
+    
+    <ui:define name="content">
+
+        <h:form>
 
             <p:dataTable value="#{usersBean.users}" var="user">
+                <p:column width="100">
+                    <h:commandLink value="Edit" action="users_edit" rendered="#{user.type == 'normal'}">
+                        <f:param name="username" value="#{user.username}" />
+                    </h:commandLink>
+                </p:column>
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="Type" />
@@ -43,6 +54,16 @@
                         <h:outputText value="E-mail" />
                     </f:facet>
                     <h:outputText value="#{user.email}" />
+                </p:column>
+                <p:column headerText="Active">
+                    <h:commandLink value="Inactivate" action="#{usersBean.activate(user)}" rendered="#{user.active}" />
+                    <h:commandLink value="Activate" action="#{usersBean.activate(user)}" rendered="#{not user.active}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Administrator" />
+                    </f:facet>
+                    <h:outputText value="#{user.administrator}" />
                 </p:column>
             </p:dataTable>
         </h:form>

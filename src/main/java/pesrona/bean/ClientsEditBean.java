@@ -10,7 +10,7 @@ import javax.faces.view.ViewScoped;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pesrona.HibernateUtil;
-import pesrona.model.Role;
+import pesrona.model.Client;
 
 /**
  *
@@ -18,27 +18,27 @@ import pesrona.model.Role;
  */
 @Named
 @ViewScoped
-public class RolesEditBean implements Serializable {
+public class ClientsEditBean implements Serializable {
 
     private Session session;
-    private Role role;
+    private Client client;
 
     @PostConstruct
     public void init() {
         session = HibernateUtil.getSessionFactory().openSession();
         FacesContext facesContext = FacesContext.getCurrentInstance();
         Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
-        Long roleId = Long.parseLong(params.get("roleId"));
-        role = session.get(Role.class, roleId);
+        Long clientId = Long.parseLong(params.get("clientId"));
+        client = session.get(Client.class, clientId);
     }
 
     public String save() {
 
         try {
             Transaction transaction = session.beginTransaction();
-            session.save(role);
+            session.save(client);
             transaction.commit();
-            return "roles";
+            return "clients";
         } catch (Exception e) {
             if (e.getMessage() == null) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown error"));
@@ -53,9 +53,9 @@ public class RolesEditBean implements Serializable {
 
         try {
             Transaction transaction = session.beginTransaction();
-            session.delete(role);
+            session.delete(client);
             transaction.commit();
-            return "roles";
+            return "clients";
         } catch (Exception e) {
             if (e.getMessage() == null) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown error"));
@@ -66,12 +66,12 @@ public class RolesEditBean implements Serializable {
         return null;
     }
 
-    public Role getRole() {
-        return role;
+    public Client getClient() {
+        return client;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
 }

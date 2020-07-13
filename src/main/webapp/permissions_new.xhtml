@@ -15,22 +15,25 @@
             <h:panelGrid columns="2">
 
                 <h:outputText value="Role" />
-                <h:selectOneMenu value="#{permissionsNewBean.roleId}">
+                <h:selectOneMenu value="#{permissionsNewBean.roleId}" required="true" requiredMessage="Role is required!">
                     <f:selectItems value="#{permissionsNewBean.roles}" var="role"
                                    itemValue="#{role.id}" itemLabel="#{role.name}" />
                 </h:selectOneMenu>
 
                 <h:outputText value="Client" />
-                <h:selectOneMenu value="#{permissionsNewBean.clientId}">
+                <h:selectOneMenu value="#{permissionsNewBean.clientId}" required="true" requiredMessage="Client is required!">
                     <f:selectItems value="#{permissionsNewBean.clients}" var="client"
                                    itemValue="#{client.id}" itemLabel="#{client.name}" />
                 </h:selectOneMenu>
 
                 <h:outputText value="Scope" />
-                <h:selectOneMenu value="#{permissionsNewBean.scopeCode}">
+                <h:selectOneMenu value="#{permissionsNewBean.scopeCode}" required="true" requiredMessage="Scope is required!">
                     <f:selectItems value="#{permissionsNewBean.scopes}" var="scope"
                                    itemValue="#{scope.code}" itemLabel="#{scope.name}" />
                 </h:selectOneMenu>
+                
+                <h:outputText value="Expiry Date" />
+                <p:datePicker value="#{permissionsNewBean.expiryDate}" required="true" requiredMessage="Expiry date is required!" />
 
                 <p:spacer />
                 <h:commandButton value="Save" action="#{permissionsNewBean.save()}" />

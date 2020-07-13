@@ -5,17 +5,14 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
-import javax.naming.Binding;
 import javax.naming.Context;
-import javax.naming.NameClassPair;
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
-import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
@@ -24,8 +21,6 @@ import javax.naming.directory.SearchResult;
 import org.hibernate.Session;
 import pesrona.HibernateUtil;
 import pesrona.listener.NewSettingsListener;
-import pesrona.model.Client;
-import pesrona.model.Role;
 import pesrona.model.Setting;
 import pesrona.model.User;
 
@@ -54,6 +49,17 @@ public class UsersBean implements Serializable {
         }
     }
 
+    public void activate(User user) {
+        session.getTransaction().begin();
+        if (user.getActive() == null) {
+            user.setActive(true);
+        } else {
+            user.setActive(!user.getActive());
+        }
+        session.save(user);
+        session.getTransaction().commit();
+    }
+
     public void sync() {
 
         Hashtable<String, String> env = new Hashtable<String, String>();
@@ -64,9 +70,15 @@ public class UsersBean implements Serializable {
         DirContext context;
 
         try {
-            context = ldapContext(env);
-        } catch (Exception e) {
-            e.printStackTrace();
+            env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+            env.put(Context.PROVIDER_URL, "ldap://" + settingValues.get(NewSettingsListener.LDAP_HOST) + ":" + settingValues.get(NewSettingsListener.LDAP_PORT));
+            context = new InitialDirContext(env);
+        } catch (NamingException e) {
+            if (e.getMessage() == null) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown error"));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
+            }
             return;
         }
 
@@ -88,6 +100,15 @@ public class UsersBean implements Serializable {
                 SearchResult binding = results.nextElement();
                 Attributes attributes = binding.getAttributes();
 
+                if (attributes == null) {
+                    continue;
+                }
+
+                if (attributes.get(loginAttribute) == null || attributes.get(emailAttribute) == null
+                        || attributes.get(nameAttribute) == null) {
+                    continue;
+                }
+
                 if (attributes.get(loginAttribute).get() == null || attributes.get(emailAttribute).get() == null
                         || attributes.get(nameAttribute).get() == null) {
                     continue;
@@ -100,6 +121,7 @@ public class UsersBean implements Serializable {
                 if (user == null) {
                     user = new User();
                     user.setUsername(username);
+                    user.setActive(true);
                 }
 
                 user.setEmail(attributes.get(emailAttribute).get().toString());
@@ -111,17 +133,13 @@ public class UsersBean implements Serializable {
 
             session.getTransaction().commit();
 
-        } catch (Exception ex) {
-            Logger.getLogger(UsersBean.class.getName()).log(Level.SEVERE, null, ex);
-            return;
+        } catch (NamingException e) {
+            if (e.getMessage() == null) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown error"));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
+            }
         }
-    }
-
-    private DirContext ldapContext(Hashtable<String, String> env) throws Exception {
-        env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-        env.put(Context.PROVIDER_URL, "ldap://" + settingValues.get(NewSettingsListener.LDAP_HOST) + ":" + settingValues.get(NewSettingsListener.LDAP_PORT));
-        DirContext ctx = new InitialDirContext(env);
-        return ctx;
     }
 
     /**

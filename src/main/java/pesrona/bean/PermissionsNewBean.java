@@ -1,6 +1,7 @@
 package pesrona.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -22,19 +23,13 @@ import pesrona.model.Scope;
 public class PermissionsNewBean implements Serializable {
 
     private Session session;
-    
+
     private Long roleId;
     private Long clientId;
     private String scopeCode;
+    private Date expiryDate;
+
     private List<Role> roles;
-
-    public String getScopeCode() {
-        return scopeCode;
-    }
-
-    public void setScopeCode(String scopeCode) {
-        this.scopeCode = scopeCode;
-    }
     private List<Client> clients;
     private List<Scope> scopes;
 
@@ -128,4 +123,19 @@ public class PermissionsNewBean implements Serializable {
         this.scopes = scopes;
     }
 
+    public String getScopeCode() {
+        return scopeCode;
+    }
+
+    public void setScopeCode(String scopeCode) {
+        this.scopeCode = scopeCode;
+    }
+
+    public Date getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(Date expiryDate) {
+        this.expiryDate = expiryDate;
+    }
 }

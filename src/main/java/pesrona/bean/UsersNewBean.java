@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pesrona.bean;
 
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.hibernate.Session;
@@ -22,7 +19,6 @@ import pesrona.model.User;
 @ViewScoped
 public class UsersNewBean implements Serializable {
 
-    private String type;
     private String name;
     private String username;
     private String email;
@@ -39,13 +35,17 @@ public class UsersNewBean implements Serializable {
             User user = new User();
             user.setName(name);
             user.setUsername(username);
-            user.setType(type);
+            user.setType("normal");
             user.setEmail(email);
             session.save(user);
             transaction.commit();
             return "users";
         } catch (Exception e) {
-            e.printStackTrace();
+            if (e.getMessage() == null) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown error"));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
+            }
         }
         return null;
     }
@@ -56,20 +56,6 @@ public class UsersNewBean implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * @return the type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * @param type the type to set
-     */
-    public void setType(String type) {
-        this.type = type;
     }
 
     /**

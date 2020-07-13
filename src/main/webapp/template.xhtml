@@ -12,15 +12,16 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
         <style type="text/css">
+
             body {
                 margin-top: 1em;
                 margin-bottom: 1em;
             }
-            
+
             h1 {
                 margin-bottom: 1em;
             }
-            
+
             .ui-widget-content {
                 border: 0 !important;
             }
@@ -28,26 +29,31 @@
     </h:head>
 
     <h:body>
-        
+
         <div class="container">
 
             <div class="row">
                 <div class="col-sm-3">
                     <ul>
                         <li><a href="#{request.contextPath}/pages/roles.xhtml">Roles</a></li>
+                        <li><a href="#{request.contextPath}/pages/users.xhtml">Users</a></li>
+                        <li></li>
                         <li><a href="#{request.contextPath}/pages/clients.xhtml">Clients</a></li>
                         <li><a href="#{request.contextPath}/pages/scopes.xhtml">Scopes</a></li>
-                        <li><a href="#{request.contextPath}/pages/users.xhtml">Users</a></li>
                         <li><a href="#{request.contextPath}/pages/resources.xhtml">Resources</a></li>
+                        <li></li>
                         <li><a href="#{request.contextPath}/pages/assignments.xhtml">Assignments</a></li>
                         <li><a href="#{request.contextPath}/pages/permissions.xhtml">Permissions</a></li>
+                        <li></li>
                         <li><a href="#{request.contextPath}/pages/settings.xhtml">Settings</a></li>
+                        <li></li>
+                        <li><a href="#{request.contextPath}/pages/settings.xhtml">Permissions Report</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-9">
-                    
+
                     <h:messages />
-                    
+
                     <div class="row">
                         <div class="col-sm-6">
                             <ui:insert name="left"></ui:insert>
@@ -56,11 +62,11 @@
                             <ui:insert name="right"></ui:insert>
                         </div>
                     </div>
-                    
+
                     <ui:insert name="content"></ui:insert>
                 </div>
             </div>
-            
+
         </div>
 
 

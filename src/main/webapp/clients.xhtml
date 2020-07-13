@@ -16,6 +16,11 @@
             <h:commandLink value="New Client" action="clients_new" />
 
             <p:dataTable value="#{clientsBean.clients}" var="client">
+                <p:column width="100">
+                    <h:commandLink value="Edit" action="clients_edit">
+                        <f:param name="clientId" value="#{client.id}" />
+                    </h:commandLink>
+                </p:column>
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="Name" />
@@ -26,7 +31,7 @@
                     <f:facet name="header">
                         <h:outputText value="Secret Key" />
                     </f:facet>
-                    <h:outputText value="#{client.token}" />
+                    <h:inputText value="#{client.token}" readonly="true" />
                     <h:commandLink value="Reset" action="#{clientsBean.retokenize(client)}" onclick="if (confirm('Are you sure?') === false) {
                                 return false;
                             }" />

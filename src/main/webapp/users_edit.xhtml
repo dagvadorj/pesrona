@@ -8,7 +8,16 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="left">
-        <h1>New User</h1>
+        <h1>Edit User</h1>
+    </ui:define>
+    
+    <ui:define name="right">
+        <h:form>
+            <h:commandButton value="Delete" action="#{usersEditBean.remove()}" class="btn btn-danger" onclick="if (confirm('Are you sure?') === false) {
+                        return false;
+                    }
+                             " />
+        </h:form>
     </ui:define>
     
     <ui:define name="content">
@@ -17,17 +26,14 @@
 
             <h:panelGrid columns="2">
 
-                <h:outputText value="Username" />
-                <h:inputText value="#{usersNewBean.username}" />
-
                 <h:outputText value="E-mail" />
-                <h:inputText value="#{usersNewBean.email}" />
+                <h:inputText value="#{usersEditBean.user.email}" />
 
                 <h:outputText value="Name" />
-                <h:inputText value="#{usersNewBean.name}" />
+                <h:inputText value="#{usersEditBean.user.name}" />
 
                 <p:spacer />
-                <h:commandButton value="Save" action="#{usersNewBean.save()}" />
+                <h:commandButton value="Save" action="#{usersEditBean.save()}" class="btn btn-primary" />
             </h:panelGrid>
         </h:form>
 

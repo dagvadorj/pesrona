@@ -21,10 +21,14 @@ public class User implements Serializable {
 
     @Id
     private String username;
-    
+
     private String password;
 
     private String email;
+
+    private Boolean active;
+
+    private Boolean administrator;
 
     /**
      * @return the name
@@ -94,5 +98,21 @@ public class User implements Serializable {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public Boolean getAdministrator() {
+        return administrator;
+    }
+
+    public void setAdministrator(Boolean administrator) {
+        this.administrator = administrator;
     }
 }
