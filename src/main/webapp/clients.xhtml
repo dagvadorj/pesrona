@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 template="./template.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -20,6 +21,15 @@
                         <h:outputText value="Name" />
                     </f:facet>
                     <h:outputText value="#{client.name}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Secret Key" />
+                    </f:facet>
+                    <h:outputText value="#{client.token}" />
+                    <h:commandLink value="Reset" action="#{clientsBean.retokenize(client)}" onclick="if (confirm('Are you sure?') === false) {
+                                return false;
+                            }" />
                 </p:column>
             </p:dataTable>
         </h:form>

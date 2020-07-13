@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 template="./template.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -9,23 +10,23 @@
     <ui:define name="content">
 
         <h:form>
-            
+
             <h1>New Scope</h1>
-            
+
             <h:panelGrid columns="2">
-                
+
                 <h:outputText value="Code" />
                 <h:inputText value="#{scopesNewBean.code}" />
-                
+
                 <h:outputText value="Name" />
                 <h:inputText value="#{scopesNewBean.name}" label="Name" />
-                
+
                 <h:outputText value="Client Name" />
                 <h:selectOneMenu value="#{scopesNewBean.clientId}">
                     <f:selectItems value="#{scopesNewBean.clients}" var="client"
                                    itemValue="#{client.id}" itemLabel="#{client.name}" />
                 </h:selectOneMenu>
-                
+
                 <p:spacer />
                 <h:commandButton value="Save" action="#{scopesNewBean.save()}" />
             </h:panelGrid>

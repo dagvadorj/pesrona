@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="./template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="left">
+        <h1>Edit Role</h1>
+    </ui:define>
+    <ui:define name="right">
+        <h:form>
+            <h:commandButton value="Delete" action="#{rolesEditBean.remove()}" class="btn btn-danger" onclick="if (confirm('Are you sure?') === false) {
+                        return false;
+                    }
+                             " />
+        </h:form>
+    </ui:define>
+
+    <ui:define name="content">
+
+        <h:form>
+
+            <p:panelGrid columns="2" layout="grid">
+
+                <h:outputText value="Role Name" />
+
+                <h:panelGroup>
+
+                    <div class="form-group">
+                        <h:inputText value="#{rolesEditBean.role.name}" required="true" requiredMessage="Role is required" class="form-control" />
+                    </div>
+                </h:panelGroup>
+
+                <p:spacer />
+                <h:commandButton value="Update" action="#{rolesEditBean.save()}" class="btn btn-primary" />
+            </p:panelGrid>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

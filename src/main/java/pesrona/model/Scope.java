@@ -6,6 +6,7 @@
 package pesrona.model;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,15 +21,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "p_scope")
 public class Scope implements Serializable {
-    
+
     @Id
     private String code;
-    
+
     private String name;
-    
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Client client;
-    
+
     private Boolean active;
 
     /**
@@ -86,6 +87,5 @@ public class Scope implements Serializable {
     public void setActive(Boolean active) {
         this.active = active;
     }
-    
-    
+
 }

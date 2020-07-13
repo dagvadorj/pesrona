@@ -1,20 +1,31 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 template="./template.xhtml"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+    <ui:define name="left">
+        <h1>Roles</h1>
+    </ui:define>
+    
+    <ui:define name="right">
+        <h:form>
+            <h:commandLink value="New Role" action="roles_new" />
+        </h:form>
+    </ui:define>
+
     <ui:define name="content">
 
         <h:form>
-
-            <h1>Roles</h1>
-            
-            <h:commandLink value="New Role" action="roles_new" />
-            
-            <p:dataTable value="#{rolesBean.roles}" var="role">
+            <p:dataTable value="#{rolesBean.roles}" var="role" class="table">
+                <p:column width="100">
+                    <h:commandLink value="Edit" action="roles_edit">
+                        <f:param name="roleId" value="#{role.id}" />
+                    </h:commandLink>
+                </p:column>
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="Name" />

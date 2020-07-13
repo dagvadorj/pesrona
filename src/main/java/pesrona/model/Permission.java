@@ -1,42 +1,44 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pesrona.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author poc
  */
 @Entity
-@Table(name = "p_permission")
+@Table(name = "p_permission", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"client_id", "role_id", "scope_code"})})
 public class Permission implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "client_id")
     private Client client;
-    
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "role_id")
     private Role role;
-    
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "scope_code")
     private Scope scope;
-    
+
     @Temporal(TemporalType.DATE)
     private Date expiryDate;
 
@@ -109,6 +111,5 @@ public class Permission implements Serializable {
     public void setExpiryDate(Date expiryDate) {
         this.expiryDate = expiryDate;
     }
-    
-    
+
 }

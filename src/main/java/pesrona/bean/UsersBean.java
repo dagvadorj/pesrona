@@ -58,7 +58,7 @@ public class UsersBean implements Serializable {
 
         Hashtable<String, String> env = new Hashtable<String, String>();
         env.put(Context.SECURITY_AUTHENTICATION, settingValues.get(NewSettingsListener.LDAP_ENCRYPTION));
-        env.put(Context.SECURITY_PRINCIPAL, settingValues.get(NewSettingsListener.LDAP_BASEDN));
+        env.put(Context.SECURITY_PRINCIPAL, settingValues.get(NewSettingsListener.LDAP_ACCOUNT));
         env.put(Context.SECURITY_CREDENTIALS, settingValues.get(NewSettingsListener.LDAP_PASSWORD));
 
         DirContext context;
@@ -80,20 +80,30 @@ public class UsersBean implements Serializable {
 
             session.getTransaction().begin();
 
+            String loginAttribute = settingValues.get(NewSettingsListener.LDAP_LOGIN);
+            String emailAttribute = settingValues.get(NewSettingsListener.LDAP_EMAIL);
+            String nameAttribute = settingValues.get(NewSettingsListener.LDAP_FNAME);
+
             while (results.hasMoreElements()) {
                 SearchResult binding = results.nextElement();
                 Attributes attributes = binding.getAttributes();
 
-                String username = attributes.get(settingValues.get(NewSettingsListener.LDAP_LOGIN)).get().toString();
+                if (attributes.get(loginAttribute).get() == null || attributes.get(emailAttribute).get() == null
+                        || attributes.get(nameAttribute).get() == null) {
+                    continue;
+                }
+
+                String username = attributes.get(loginAttribute).get().toString();
 
                 User user = session.get(User.class, username);
 
                 if (user == null) {
                     user = new User();
+                    user.setUsername(username);
                 }
 
-                user.setEmail(attributes.get(settingValues.get(NewSettingsListener.LDAP_EMAIL)).get().toString());
-                user.setName(attributes.get(settingValues.get(NewSettingsListener.LDAP_FNAME)).get().toString());
+                user.setEmail(attributes.get(emailAttribute).get().toString());
+                user.setName(attributes.get(nameAttribute).get().toString());
                 user.setType("ldap");
 
                 session.save(user);
