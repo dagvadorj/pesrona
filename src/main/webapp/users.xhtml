@@ -15,7 +15,7 @@
             <h:panelGrid columns="3">
                 <h:commandLink value="New User" action="users_new" />
                 <p:spacer width="30" />
-                <h:commandLink value="Sync" />
+                <h:commandLink value="Sync" action="#{usersBean.sync()}" />
             </h:panelGrid>
             
             <p:dataTable value="#{usersBean.users}" var="user">

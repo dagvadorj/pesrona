@@ -9,10 +9,7 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.hibernate.Session;
 import pesrona.HibernateUtil;
-import pesrona.model.Client;
-import pesrona.model.Role;
 import pesrona.model.Setting;
-import pesrona.model.User;
 
 /**
  *
