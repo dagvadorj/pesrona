@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
+ * This filters JSF servlet requests and redirects them to login page when user session is not initiated
  * @author dagva
  */
 @WebFilter(filterName = "AuthenticationFilter", servletNames = {"Faces Servlet"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.INCLUDE, DispatcherType.FORWARD})

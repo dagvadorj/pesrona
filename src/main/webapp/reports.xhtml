@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="./template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="left">
+        <h1>Report</h1>
+    </ui:define>
+    <ui:define name="right">
+        <h:form>
+            <h:commandLink value="Export as Excel">
+                <p:dataExporter type="xlsxstream" target="main_form:reports" fileName="reports" />
+            </h:commandLink>
+            <p:spacer width="20" />
+            <h:commandLink value="Export as PDF">
+                <p:dataExporter type="pdf" target="main_form:reports" fileName="reports"/>
+            </h:commandLink>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="main_form">
+            
+            <p:dataTable value="#{reportsBean.reports}" var="report" paginator="true" widgetVar="reports" id="reports">
+                <p:column filterBy="#{report.user.username}" filterMatchMode="exact" headerText="User">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('reports').filter()" filter="true" filterMatchMode="contains" style="width: 100%; ">
+                            <f:selectItem itemLabel="Show All" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{reportsBean.users}" var="user" itemValue="#{user.username}"
+                                           itemLabel="#{user.name}" />
+                        </p:selectOneMenu>
+                    </f:facet>
+                    <h:outputText value="#{report.user.name}" />
+                </p:column>
+                <p:column filterBy="#{report.role.id}" filterMatchMode="exact" headerText="Role">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('reports').filter()" filter="true" filterMatchMode="contains" style="width: 100%; ">
+                            <f:selectItem itemLabel="Show All" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{reportsBean.roles}" var="role" itemValue="#{role.id}"
+                                           itemLabel="#{role.name}" />
+                        </p:selectOneMenu>
+                    </f:facet>
+                    <h:outputText value="#{report.role.name}" />
+                </p:column>
+                <p:column filterBy="#{report.client.id}" filterMatchMode="exact" headerText="Client">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('reports').filter()" filter="true" filterMatchMode="contains" style="width: 100%; ">
+                            <f:selectItem itemLabel="Show All" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{reportsBean.clients}" var="client" itemValue="#{client.id}"
+                                           itemLabel="#{client.name}" />
+                        </p:selectOneMenu>
+                    </f:facet>
+                    <h:outputText value="#{report.client.name}" />
+                </p:column>
+                <p:column headerText="Scope">
+                    <h:outputText value="#{report.scope.name}" />
+                </p:column>
+                <p:column filterBy="#{report.resource.code}" filterMatchMode="exact" headerText="Resource">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('reports').filter()" filter="true" filterMatchMode="contains" style="width: 100%; ">
+                            <f:selectItem itemLabel="Show All" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{reportsBean.resources}" var="r" itemValue="#{r.code}"
+                                           itemLabel="#{r.code} - #{r.name}" />
+                        </p:selectOneMenu>
+                    </f:facet>
+                    <h:outputText value="#{report.client.name}" />
+                </p:column>
+                <p:column headerText="Assignment Created Date" sortBy="#{report.assignmentCreatedDate}">
+                    <h:outputText value="#{report.assignmentCreatedDate}">
+                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Assignment Expiry Date" sortBy="#{report.assignmentExpiryDate}">
+                    <h:outputText value="#{report.assignmentExpiryDate}">
+                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Permission Created Date" sortBy="#{report.permissionCreatedDate}">
+                    <h:outputText value="#{report.permissionCreatedDate}">
+                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Permission Expiry Date" sortBy="#{report.permissionExpiryDate}">
+                    <h:outputText value="#{report.permissionExpiryDate}">
+                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                    </h:outputText>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
