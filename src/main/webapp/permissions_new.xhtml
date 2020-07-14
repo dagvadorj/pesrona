@@ -7,39 +7,60 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 
-    <ui:define name="content">
-
+    <ui:define name="left">
         <h1>New Permission</h1>
+    </ui:define>
+    <ui:define name="right">
+    </ui:define>
 
+    <ui:define name="content">
         <h:form>
-            <h:panelGrid columns="2">
+            <p:panelGrid columns="2" layout="grid">
 
                 <h:outputText value="Role" />
-                <h:selectOneMenu value="#{permissionsNewBean.roleId}" required="true" requiredMessage="Role is required!">
-                    <f:selectItems value="#{permissionsNewBean.roles}" var="role"
-                                   itemValue="#{role.id}" itemLabel="#{role.name}" />
-                </h:selectOneMenu>
+                <h:panelGroup>
+                    <div class="form-group">
+                        <p:selectOneMenu value="#{permissionsNewBean.roleId}" filter="true" filterMatchMode="contains" required="true" requiredMessage="Role is required!">
+                            <f:selectItems value="#{permissionsNewBean.roles}" var="role"
+                                           itemValue="#{role.id}" itemLabel="#{role.name}" />
+                        </p:selectOneMenu>
+                    </div>
+                </h:panelGroup>
 
                 <h:outputText value="Client" />
-                <h:selectOneMenu value="#{permissionsNewBean.clientId}" required="true" requiredMessage="Client is required!">
-                    <f:selectItems value="#{permissionsNewBean.clients}" var="client"
-                                   itemValue="#{client.id}" itemLabel="#{client.name}" />
-                </h:selectOneMenu>
+                <h:panelGroup>
+                    <div class="form-group">
+                        <p:selectOneMenu value="#{permissionsNewBean.clientId}" required="true" requiredMessage="Client is required!">
+                            <f:ajax listener="#{permissionsNewBean.refreshScopes()}" event="change" render="@form" />
+                            <f:selectItem value="#{null}" itemDescription="" noSelectionOption="true" />
+                            <f:selectItems value="#{permissionsNewBean.clients}" var="client"
+                                           itemValue="#{client.id}" itemLabel="#{client.name}" />
+                        </p:selectOneMenu>
+                    </div>
+                </h:panelGroup>
 
                 <h:outputText value="Scope" />
-                <h:selectOneMenu value="#{permissionsNewBean.scopeCode}" required="true" requiredMessage="Scope is required!">
-                    <f:selectItems value="#{permissionsNewBean.scopes}" var="scope"
-                                   itemValue="#{scope.code}" itemLabel="#{scope.name}" />
-                </h:selectOneMenu>
-                
+                <h:panelGroup>
+                    <div class="form-group">
+                        <p:selectOneMenu value="#{permissionsNewBean.scopeCode}" required="true" requiredMessage="Scope is required!">
+                            <f:selectItems value="#{permissionsNewBean.scopes}" var="scope"
+                                           itemValue="#{scope.code}" itemLabel="#{scope.name}" />
+                        </p:selectOneMenu>
+                    </div>
+                </h:panelGroup>
+
                 <h:outputText value="Expiry Date" />
-                <p:datePicker value="#{permissionsNewBean.expiryDate}" required="true" requiredMessage="Expiry date is required!" pattern="yyyy-MM-dd">
-                    <f:convertDateTime pattern="yyyy-MM-dd" />
-                </p:datePicker>
+                <h:panelGroup>
+                    <div class="form-group">
+                        <p:datePicker value="#{permissionsNewBean.expiryDate}" required="true" requiredMessage="Expiry date is required!" pattern="yyyy-MM-dd">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </p:datePicker>
+                    </div>
+                </h:panelGroup>
 
                 <p:spacer />
-                <h:commandButton value="Save" action="#{permissionsNewBean.save()}" />
-            </h:panelGrid>
+                <h:commandButton value="Save" action="#{permissionsNewBean.save()}" class="btn btn-primary" />
+            </p:panelGrid>
         </h:form>
 
     </ui:define>

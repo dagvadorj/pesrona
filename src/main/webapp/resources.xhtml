@@ -21,7 +21,7 @@
 
         <h:form>
 
-            <p:dataTable value="#{resourcesBean.resources}" var="r">
+            <p:dataTable value="#{resourcesBean.resources}" var="r" paginator="true">
                 <p:column width="100">
                     <h:commandLink value="Edit" action="resources_edit">
                         <f:param name="resourceCode" value="#{r.code}" />

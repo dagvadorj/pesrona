@@ -1,6 +1,7 @@
 package pesrona.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -36,10 +37,14 @@ public class PermissionsNewBean implements Serializable {
     @PostConstruct
     public void init() {
         session = HibernateUtil.getSessionFactory().openSession();
-        setRoles((List<Role>) session.createQuery("select o from Role o").getResultList());
-        setClients((List<Client>) session.createQuery("select o from Client o").getResultList());
-        setScopes((List<Scope>) session.createQuery("select o from Scope o").getResultList());
+        roles = session.createQuery("select o from Role o").getResultList();
+        clients = session.createQuery("select o from Client o").getResultList();
+        scopes = new ArrayList<>();
         expiryDate = new Date();
+    }
+
+    public void refreshScopes() {
+        scopes = session.createQuery("select o from Scope o where o.client.id = :clientId").setParameter("clientId", clientId).getResultList();
     }
 
     public String save() {
@@ -49,6 +54,7 @@ public class PermissionsNewBean implements Serializable {
         permission.setRole(session.get(Role.class, roleId));
         permission.setClient(session.get(Client.class, clientId));
         permission.setScope(session.get(Scope.class, scopeCode));
+        permission.setCreatedDate(new Date());
         permission.setExpiryDate(expiryDate);
         session.save(permission);
         transaction.commit();

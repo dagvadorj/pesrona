@@ -16,7 +16,7 @@
             <h:commandButton value="Delete" action="#{usersEditBean.remove()}" class="btn btn-danger" onclick="if (confirm('Are you sure?') === false) {
                         return false;
                     }
-                             " />
+                             " rendered="#{usersEditBean.user.username ne 'admin'}" />
         </h:form>
     </ui:define>
 
@@ -48,6 +48,7 @@
                 <h:panelGroup>
                     <div class="form-group">
                         <h:inputSecret value="#{usersEditBean.password}" class="form-control" />
+                        <div>Leave it blank if you do not want to update password</div>
                     </div>
                 </h:panelGroup>
 

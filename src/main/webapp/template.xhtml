@@ -16,6 +16,7 @@
             body {
                 margin-top: 1em;
                 margin-bottom: 1em;
+                background: #f0f0f0;
             }
 
             h1 {
@@ -34,6 +35,16 @@
             #nav ul {
                 padding-left: 0;
             }
+
+            .ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td, .ui-datatable tfoot th {
+                border-color: #c0c0c0;
+                overflow: visible;
+                overflow-wrap: break-word;
+            }
+
+            .ui-widget-content {
+                background: none;
+            }
         </style>
     </h:head>
 
@@ -41,25 +52,37 @@
 
         <div class="container">
 
-            <div class="row">
-                <div class="col-sm-2" id="nav">
-                    <h:form>
+            <div class="row mb-4">
+                <div class="col-sm-6">
+                    <h3>Pesrona</h3>
+                    <!--<span>A simpler identity management system</span>-->
+                </div>
+                <div class="col-sm-6 text-right">
+                    <h:form style="float: right; ">
                         <h:commandLink value="Sign Out" action="#{logoutBean.logout()}" />
                     </h:form>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-2" id="nav">
+
                     <ul>
+                        <li><a href="#{request.contextPath}/pages/index.xhtml">Home</a></li>
+                        <li><hr /></li>
                         <li><a href="#{request.contextPath}/pages/roles.xhtml">Roles</a></li>
                         <li><a href="#{request.contextPath}/pages/users.xhtml">Users</a></li>
-                        <li></li>
+                        <li><hr /></li>
                         <li><a href="#{request.contextPath}/pages/clients.xhtml">Clients</a></li>
                         <li><a href="#{request.contextPath}/pages/scopes.xhtml">Scopes</a></li>
                         <li><a href="#{request.contextPath}/pages/resources.xhtml">Resources</a></li>
-                        <li></li>
+                        <li><hr /></li>
                         <li><a href="#{request.contextPath}/pages/assignments.xhtml">Assignments</a></li>
                         <li><a href="#{request.contextPath}/pages/permissions.xhtml">Permissions</a></li>
-                        <li></li>
+                        <li><hr /></li>
                         <li><a href="#{request.contextPath}/pages/settings.xhtml">Settings</a></li>
-                        <li></li>
-                        <li><a href="#{request.contextPath}/pages/settings.xhtml">Permissions Report</a></li>
+                        <li><hr /></li>
+                        <li><a href="#{request.contextPath}/pages/settings.xhtml">Report</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-10">

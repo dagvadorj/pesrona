@@ -9,6 +9,9 @@ import javax.faces.view.ViewScoped;
 import org.hibernate.Session;
 import pesrona.HibernateUtil;
 import pesrona.model.Assignment;
+import pesrona.model.Resource;
+import pesrona.model.Role;
+import pesrona.model.User;
 
 /**
  *
@@ -20,11 +23,29 @@ public class AssignmentsBean implements Serializable {
 
     private Session session;
     private List<Assignment> assignments;
+    private List<Role> roles;
+    private List<User> users;
+    private List<Resource> resources;
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public List<Resource> getResources() {
+        return resources;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
 
     @PostConstruct
     public void init() {
         session = HibernateUtil.getSessionFactory().openSession();
         assignments = session.createQuery("select o from Assignment o").getResultList();
+        roles = session.createQuery("select o from Role o").getResultList();
+        users = session.createQuery("select o from User o").getResultList();
+        resources = session.createQuery("select o from Resource o").getResultList();
     }
 
     public void expire(Assignment assignment) {
@@ -32,13 +53,10 @@ public class AssignmentsBean implements Serializable {
         assignment.setExpiryDate(new Date());
         session.save(assignment);
         session.getTransaction().commit();
-    }
-    
-    public List<Assignment> getAssignments() {
-        return assignments;
+        assignments = session.createQuery("select o from Assignment o").getResultList();
     }
 
-    public void setAssignments(List<Assignment> scopes) {
-        this.assignments = scopes;
+    public List<Assignment> getAssignments() {
+        return assignments;
     }
 }

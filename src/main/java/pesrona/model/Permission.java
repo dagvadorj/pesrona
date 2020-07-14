@@ -3,6 +3,7 @@ package pesrona.model;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,7 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "p_permission", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"client_id", "role_id", "scope_code"})})
+    @UniqueConstraint(columnNames = {"client_id", "role_id", "scope_code", "expiry_date"})})
 public class Permission implements Serializable {
 
     @Id
@@ -52,6 +53,7 @@ public class Permission implements Serializable {
     }
     
     @Temporal(TemporalType.DATE)
+    @Column(name = "expiry_date")
     private Date expiryDate;
 
     @Transient

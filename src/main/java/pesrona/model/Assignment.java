@@ -3,6 +3,7 @@ package pesrona.model;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,7 @@ import org.hibernate.annotations.UpdateTimestamp;
  */
 @Entity
 @Table(name = "p_assignment", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"role_id", "user_username", "resource_code"})})
+    @UniqueConstraint(columnNames = {"role_id", "user_username", "resource_code", "expiry_date"})})
 public class Assignment implements Serializable {
 
     @Id
@@ -49,6 +50,7 @@ public class Assignment implements Serializable {
     }
 
     @Temporal(TemporalType.DATE)
+    @Column(name = "expiry_date")
     private Date expiryDate;
 
     @Transient

@@ -3,7 +3,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                template="./template.xhtml">
+                template="./template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="left">
         <h1>Settings</h1>
@@ -13,16 +14,25 @@
 
         <h:form>
 
-            <h:dataTable value="#{settingsBean.settings}" var="setting">
+            <h:dataTable value="#{settingsBean.settings}" var="setting" style="width: 100%; ">
                 <h:column>
                     <h:outputText value="#{setting.name}" />
                 </h:column>
                 <h:column>
-                    <h:inputText value="#{settingsBean.settingValues[setting.id]}" />
+                    <div class="form-group">
+                        <h:inputText value="#{settingsBean.settingValues[setting.id]}" class="form-control" required="true" requiredMessage="#{setting.name} is required!" />
+                    </div>
                 </h:column>
             </h:dataTable>
 
-            <h:commandButton value="Update" action="#{settingsBean.update()}" class="btn btn-primary" />
+            <!--<p:spacer height="40" />-->
+            
+            <div class="row">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6 text-right">
+                    <h:commandButton value="Update" action="#{settingsBean.update()}" class="btn btn-primary" />
+                </div>
+            </div>
 
         </h:form>
 

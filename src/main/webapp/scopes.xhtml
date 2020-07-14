@@ -18,7 +18,7 @@
     <ui:define name="content">
 
         <h:form>
-            <p:dataTable value="#{scopesBean.scopes}" var="scope">
+            <p:dataTable value="#{scopesBean.scopes}" var="scope" paginator="true">
                 <p:column width="100">
                     <h:commandLink value="Edit" action="scopes_edit">
                         <f:param name="scopeCode" value="#{scope.code}" />

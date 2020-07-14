@@ -1,8 +1,11 @@
 package pesrona.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.hibernate.Session;
@@ -23,10 +26,19 @@ import pesrona.model.User;
 public class AssignmentsNewBean implements Serializable {
 
     private Session session;
-    
+
     private Long roleId;
     private String username;
     private String resourceCode;
+    private Date expiryDate;
+
+    public Date getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(Date expiryDate) {
+        this.expiryDate = expiryDate;
+    }
     private List<Client> roles;
     private List<User> users;
 
@@ -50,21 +62,36 @@ public class AssignmentsNewBean implements Serializable {
     @PostConstruct
     public void init() {
         session = HibernateUtil.getSessionFactory().openSession();
-        setRoles((List<Client>) session.createQuery("select o from Role o").getResultList());
-        setUsers((List<User>) session.createQuery("select o from User o").getResultList());
+        roles = session.createQuery("select o from Role o").getResultList();
+        users = session.createQuery("select o from User o").getResultList();
         resources = session.createQuery("select o from Resource o").getResultList();
+        expiryDate = new Date();
     }
 
     public String save() {
 
-        Transaction transaction = session.beginTransaction();
-        Assignment assignment = new Assignment();
-        assignment.setRole(session.get(Role.class, roleId));
-        assignment.setUser(session.get(User.class, username));
-        assignment.setResource(session.get(Resource.class, resourceCode));
-        session.save(assignment);
-        transaction.commit();
-        return "assignments";
+        try {
+
+            Transaction transaction = session.beginTransaction();
+            Assignment assignment = new Assignment();
+            assignment.setCreatedDate(new Date());
+            assignment.setExpiryDate(expiryDate);
+            assignment.setRole(session.get(Role.class, roleId));
+            assignment.setUser(session.get(User.class, username));
+            if (resourceCode != null && resourceCode.trim().length() > 0) {
+                assignment.setResource(session.get(Resource.class, resourceCode));
+            }
+            session.save(assignment);
+            transaction.commit();
+            return "assignments";
+        } catch (Exception e) {
+            if (e.getMessage() == null) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown error"));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
+            }
+        }
+        return null;
     }
 
     /**
@@ -129,6 +156,5 @@ public class AssignmentsNewBean implements Serializable {
     public void setResources(List<Resource> resources) {
         this.resources = resources;
     }
-
 
 }

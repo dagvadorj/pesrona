@@ -13,30 +13,52 @@
 
             <h1>New Assignment</h1>
 
-            <h:panelGrid columns="2">
+            <p:panelGrid columns="2" layout="grid">
 
                 <h:outputText value="User" />
-                <h:selectOneMenu value="#{assignmentsNewBean.username}">
-                    <f:selectItems value="#{assignmentsNewBean.users}" var="user"
-                                   itemValue="#{user.username}" itemLabel="#{user.name}" />
-                </h:selectOneMenu>
+                <h:panelGroup>
+                    <div class="form-group">
+                        <p:selectOneMenu value="#{assignmentsNewBean.username}" dynamic="true" filter="true" filterMatchMode="contains" required="true" requiredMessage="User is required!">
+                            <f:selectItems value="#{assignmentsNewBean.users}" var="user"
+                                           itemValue="#{user.username}" itemLabel="#{user.username} - #{user.name}" />
+                        </p:selectOneMenu>
+                    </div>
+                </h:panelGroup>
 
                 <h:outputText value="Role" />
-                <h:selectOneMenu value="#{assignmentsNewBean.roleId}">
-                    <f:selectItems value="#{assignmentsNewBean.roles}" var="role"
-                                   itemValue="#{role.id}" itemLabel="#{role.name}" />
-                </h:selectOneMenu>
+                <h:panelGroup>
+                    <div class="form-group">
+                        <p:selectOneMenu value="#{assignmentsNewBean.roleId}" dynamic="true" filter="true" filterMatchMode="contains" required="true" requiredMessage="Role is required!">
+                            <f:selectItems value="#{assignmentsNewBean.roles}" var="role"
+                                           itemValue="#{role.id}" itemLabel="#{role.name}" />
+                        </p:selectOneMenu>
+                    </div>
+                </h:panelGroup>
 
                 <h:outputText value="Resource" />
-                <h:selectOneMenu value="#{assignmentsNewBean.resourceCode}">
-                    <f:selectItems value="#{assignmentsNewBean.resources}" var="r"
-                                   itemValue="#{r.code}" itemLabel="#{r.name}" />
-                </h:selectOneMenu>
+                <h:panelGroup>
+                    <div class="form-group">
+                        <p:selectOneMenu value="#{assignmentsNewBean.resourceCode}" dynamic="true" filter="true" filterMatchMode="contains">
+                            <f:selectItem itemValue="#{null}" itemLabel="For all resources or regardless of specific resource(s)" />
+                            <f:selectItems value="#{assignmentsNewBean.resources}" var="r"
+                                           itemValue="#{r.code}" itemLabel="#{r.code} - #{r.name}" />
+                        </p:selectOneMenu>
+                    </div>
+                </h:panelGroup>
+                
+                <h:outputText value="Expiry Date" />
+                <h:panelGroup>
+                    <div class="form-group">
+                        <p:datePicker value="#{assignmentsNewBean.expiryDate}" required="true" requiredMessage="Expiry date is required!" pattern="yyyy-MM-dd">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </p:datePicker>
+                    </div>
+                </h:panelGroup>
 
                 <p:spacer />
-                <h:commandButton value="Save" action="#{assignmentsNewBean.save()}" />
+                <h:commandButton value="Save" action="#{assignmentsNewBean.save()}" class="btn btn-primary" />
 
-            </h:panelGrid>
+            </p:panelGrid>
 
 
         </h:form>

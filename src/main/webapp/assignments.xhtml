@@ -18,25 +18,50 @@
     <ui:define name="content">
 
         <h:form>
-            <p:dataTable value="#{assignmentsBean.assignments}" var="assignment">
-                <p:column headerText="Role">
+            <p:dataTable value="#{assignmentsBean.assignments}" var="assignment" paginator="true" widgetVar="assignments">
+                <p:column filterBy="#{assignment.user.username}" filterMatchMode="exact" headerText="User">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('assignments').filter()" filter="true" filterMatchMode="contains" style="width: 100%; ">
+                            <f:selectItem itemLabel="Show All" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{assignmentsBean.users}" var="user" itemValue="#{user.username}"
+                                           itemLabel="#{user.username} - #{user.name}" />
+                        </p:selectOneMenu>
+                    </f:facet>
+                    <h:outputText value="#{assignment.user.username} - #{assignment.user.name}" />
+                </p:column>
+                <p:column filterBy="#{assignment.role.id}" filterMatchMode="exact" headerText="Role">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('assignments').filter()" filter="true" filterMatchMode="contains" style="width: 100%; ">
+                            <f:selectItem itemLabel="Show All" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{assignmentsBean.roles}" var="role" itemValue="#{role.id}"
+                                           itemLabel="#{role.name}" />
+                        </p:selectOneMenu>
+                    </f:facet>
                     <h:outputText value="#{assignment.role.name}" />
                 </p:column>
-                <p:column headerText="User">
-                    <h:outputText value="#{assignment.user.name}" />
+                <p:column filterBy="#{assignment.resource.code}" filterMatchMode="exact" headerText="Resource">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('assignments').filter()" filter="true" filterMatchMode="contains" style="width: 100%; ">
+                            <f:selectItem itemLabel="Show All" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{assignmentsBean.resources}" var="r" itemValue="#{r.code}"
+                                           itemLabel="#{r.code} - #{r.name}" />
+                        </p:selectOneMenu>
+                    </f:facet>
+                    <h:outputText value="#{assignment.resource.code} - #{assignment.resource.name}" />
                 </p:column>
-                <p:column headerText="Resource">
-                    <h:outputText value="#{assignment.resource.code}" style="font-weight: bold; " /> - 
-                    <h:outputText value="#{assignment.resource.name}" />
+                <p:column headerText="Created Date" sortBy="#{assignment.createdDate}">
+                    <h:outputText value="#{assignment.createdDate}">
+                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                    </h:outputText>
                 </p:column>
-                <p:column headerText="Expiry Date">
+                <p:column headerText="Expiry Date" sortBy="#{assignment.expiryDate}">
                     <h:outputText value="#{assignment.expiryDate}">
                         <f:convertDateTime pattern="yyyy-MM-dd" />
                     </h:outputText>
                 </p:column>
                 <p:column headerText="Expire">
                     <h:outputText value="Expired" rendered="#{assignment.expired}" />
-                    <p:commandButton value="Expire" action="#{assignmentsBean.expire(assignment)}" rendered="#{not assignment.expired}" />
+                    <p:commandLink value="Expire" action="#{assignmentsBean.expire(assignment)}" onclick="if (confirm('Are you sure?') === false) return; " rendered="#{not assignment.expired}" />
                 </p:column>
             </p:dataTable>
         </h:form>

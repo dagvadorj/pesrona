@@ -7,32 +7,57 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 
+    <ui:define name="left">
+        <h1>Permissions</h1>
+    </ui:define>
+    <ui:define name="right">
+        <h:form>
+            <h:commandLink value="New Permission" action="permissions_new" />
+        </h:form>
+    </ui:define>
+
     <ui:define name="content">
 
         <h:form>
-
-            <h1>Permissions</h1>
-
-            <h:commandLink value="New Permission" action="permissions_new" />
-
-            <p:dataTable value="#{permissionsBean.permissions}" var="permission">
-                <p:column headerText="Role">
+            <p:dataTable value="#{permissionsBean.permissions}" var="permission" paginator="true" widgetVar="permissions">
+                <p:column filterBy="#{permission.role.id}" filterMatchMode="exact" headerText="Role">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('permissions').filter()" filter="true" filterMatchMode="contains" style="width: 100%; ">
+                            <f:selectItem itemLabel="Show All" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{permissionsBean.roles}" var="role" itemValue="#{role.id}"
+                                           itemLabel="#{role.name}" />
+                        </p:selectOneMenu>
+                    </f:facet>
                     <h:outputText value="#{permission.role.name}" />
                 </p:column>
-                <p:column headerText="Client">
+                <p:column filterBy="#{permission.client.id}" filterMatchMode="exact" headerText="Client">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('permissions').filter()" filter="true" filterMatchMode="contains" style="width: 100%; ">
+                            <f:selectItem itemLabel="Show All" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{permissionsBean.clients}" var="client" itemValue="#{client.id}"
+                                           itemLabel="#{client.name}" />
+                        </p:selectOneMenu>
+                    </f:facet>
                     <h:outputText value="#{permission.client.name}" />
                 </p:column>
                 <p:column headerText="Scope">
                     <h:outputText value="#{permission.scope.name}" />
                 </p:column>
-                <p:column headerText="Expiry Date">
+                <p:column headerText="Created Date" sortBy="#{permission.createdDate}">
+                    <h:outputText value="#{permission.createdDate}">
+                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Expiry Date" sortBy="#{permission.expiryDate}">
                     <h:outputText value="#{permission.expiryDate}">
                         <f:convertDateTime pattern="yyyy-MM-dd" />
                     </h:outputText>
                 </p:column>
                 <p:column headerText="Expire">
                     <h:outputText value="Expired" rendered="#{permission.expired}" />
-                    <p:commandButton value="Expire" action="#{permissionsBean.expire(permission)}" rendered="#{not permission.expired}" />
+                    <h:commandLink value="Expire" action="#{permissionsBean.expire(permission)}" onclick="if (confirm('Are you sure?') === false)
+                                return;
+                                     " rendered="#{not permission.expired}" />
                 </p:column>
             </p:dataTable>
         </h:form>
