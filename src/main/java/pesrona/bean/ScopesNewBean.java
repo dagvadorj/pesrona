@@ -8,6 +8,8 @@ package pesrona.bean;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.hibernate.Session;
@@ -25,7 +27,7 @@ import pesrona.model.Scope;
 public class ScopesNewBean implements Serializable {
 
     private Session session;
-    
+
     private String code;
 
     public String getCode() {
@@ -47,14 +49,23 @@ public class ScopesNewBean implements Serializable {
 
     public String save() {
 
-        Transaction transaction = session.beginTransaction();
-        Scope scope = new Scope();
-        scope.setCode(code);
-        scope.setName(name);
-        scope.setClient(session.get(Client.class, clientId));
-        session.save(scope);
-        transaction.commit();
-        return "scopes";
+        try {
+            Transaction transaction = session.beginTransaction();
+            Scope scope = new Scope();
+            scope.setCode(code);
+            scope.setName(name);
+            scope.setClient(session.get(Client.class, clientId));
+            session.save(scope);
+            transaction.commit();
+            return "scopes";
+        } catch (Exception e) {
+            if (e.getMessage() == null) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown error"));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
+            }
+        }
+        return null;
     }
 
     public String getName() {
@@ -85,6 +96,5 @@ public class ScopesNewBean implements Serializable {
     public void setClientId(Long clientId) {
         this.clientId = clientId;
     }
-
 
 }

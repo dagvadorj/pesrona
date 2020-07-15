@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.hibernate.Session;
@@ -49,16 +51,25 @@ public class PermissionsNewBean implements Serializable {
 
     public String save() {
 
-        Transaction transaction = session.beginTransaction();
-        Permission permission = new Permission();
-        permission.setRole(session.get(Role.class, roleId));
-        permission.setClient(session.get(Client.class, clientId));
-        permission.setScope(session.get(Scope.class, scopeCode));
-        permission.setCreatedDate(new Date());
-        permission.setExpiryDate(expiryDate);
-        session.save(permission);
-        transaction.commit();
-        return "permissions";
+        try {
+            Transaction transaction = session.beginTransaction();
+            Permission permission = new Permission();
+            permission.setRole(session.get(Role.class, roleId));
+            permission.setClient(session.get(Client.class, clientId));
+            permission.setScope(session.get(Scope.class, scopeCode));
+            permission.setCreatedDate(new Date());
+            permission.setExpiryDate(expiryDate);
+            session.save(permission);
+            transaction.commit();
+            return "permissions";
+        } catch (Exception e) {
+            if (e.getMessage() == null) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown error"));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
+            }
+        }
+        return null;
     }
 
     /**

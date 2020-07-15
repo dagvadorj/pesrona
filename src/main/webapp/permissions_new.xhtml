@@ -31,7 +31,7 @@
                 <h:panelGroup>
                     <div class="form-group">
                         <p:selectOneMenu value="#{permissionsNewBean.clientId}" required="true" requiredMessage="Client is required!">
-                            <f:ajax listener="#{permissionsNewBean.refreshScopes()}" event="change" render="@form" />
+                            <f:ajax listener="#{permissionsNewBean.refreshScopes()}" event="change" render="scope" />
                             <f:selectItem value="#{null}" itemDescription="" noSelectionOption="true" />
                             <f:selectItems value="#{permissionsNewBean.clients}" var="client"
                                            itemValue="#{client.id}" itemLabel="#{client.name}" />
@@ -40,7 +40,7 @@
                 </h:panelGroup>
 
                 <h:outputText value="Scope" />
-                <h:panelGroup>
+                <h:panelGroup id="scope">
                     <div class="form-group">
                         <p:selectOneMenu value="#{permissionsNewBean.scopeCode}" required="true" requiredMessage="Scope is required!">
                             <f:selectItems value="#{permissionsNewBean.scopes}" var="scope"
@@ -52,7 +52,7 @@
                 <h:outputText value="Expiry Date" />
                 <h:panelGroup>
                     <div class="form-group">
-                        <p:datePicker value="#{permissionsNewBean.expiryDate}" required="true" requiredMessage="Expiry date is required!" pattern="yyyy-MM-dd">
+                        <p:datePicker value="#{permissionsNewBean.expiryDate}" pattern="yyyy-MM-dd">
                             <f:convertDateTime pattern="yyyy-MM-dd" />
                         </p:datePicker>
                     </div>
