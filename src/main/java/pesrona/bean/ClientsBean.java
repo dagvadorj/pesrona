@@ -37,8 +37,4 @@ public class ClientsBean implements Serializable {
     public List<Client> getClients() {
         return clients;
     }
-
-    public void setRoles(List<Client> clients) {
-        this.clients = clients;
-    }
 }

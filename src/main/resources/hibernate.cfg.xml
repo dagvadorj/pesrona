@@ -1,12 +1,10 @@
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost/pesrona</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">root</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+        <property name="hibernate.connection.datasource">java:/pesrona/ds</property>
+        <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JTATransactionFactory</property>
+        <property name="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JBossTransactionManagerLookup</property>
         <property name="hibernate.show_sql">true</property>
-        <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.archive.autodetection">class</property>
         <mapping class="pesrona.model.User" />
