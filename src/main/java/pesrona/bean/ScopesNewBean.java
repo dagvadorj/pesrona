@@ -44,7 +44,7 @@ public class ScopesNewBean implements Serializable {
     @PostConstruct
     public void init() {
         session = HibernateUtil.getSessionFactory().openSession();
-        clients = (List<Client>) session.createQuery("select o from Client o").getResultList();
+        clients = session.createQuery("select o from Client o", Client.class).getResultList();
     }
 
     public String save() {

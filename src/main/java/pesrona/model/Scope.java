@@ -6,10 +6,9 @@
 package pesrona.model;
 
 import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -22,7 +21,9 @@ import javax.persistence.Table;
 @Table(name = "p_scope")
 public class Scope implements Serializable {
 
-    @Id
+	private static final long serialVersionUID = 1L;
+
+	@Id
     private String code;
 
     private String name;

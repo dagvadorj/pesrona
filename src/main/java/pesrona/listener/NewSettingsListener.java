@@ -1,14 +1,14 @@
 package pesrona.listener;
 
-import com.google.common.hash.Hashing;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+
 import org.hibernate.Session;
+
 import pesrona.HibernateUtil;
 import pesrona.model.Setting;
-import pesrona.model.User;
 
 /**
  * Web application lifecycle listener.

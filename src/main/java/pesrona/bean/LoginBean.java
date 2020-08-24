@@ -22,7 +22,9 @@ import pesrona.model.User;
 @ViewScoped
 public class LoginBean implements Serializable {
 
-    private Session session;
+	private static final long serialVersionUID = 1L;
+
+	private Session session;
 
     private String username;
     private String password;
@@ -33,7 +35,7 @@ public class LoginBean implements Serializable {
     }
 
     public String login() {
-        List<User> users = session.createQuery("select o from User o where o.username = :username and o.password = :password and o.active = true and o.administrator = true")
+        List<User> users = session.createQuery("select o from User o where o.username = :username and o.password = :password and o.active = true and o.administrator = true", User.class)
                 .setParameter("username", username)
                 .setParameter("password", Hashing.sha512().hashString(password, StandardCharsets.UTF_8).toString())
                 .getResultList();

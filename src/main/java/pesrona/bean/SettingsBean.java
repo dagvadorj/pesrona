@@ -19,7 +19,9 @@ import pesrona.model.Setting;
 @ViewScoped
 public class SettingsBean implements Serializable {
 
-    private Session session;
+	private static final long serialVersionUID = 1L;
+
+	private Session session;
     
     private List<Setting> settings;
     private Map<Long, String> settingValues;
@@ -27,7 +29,7 @@ public class SettingsBean implements Serializable {
     @PostConstruct
     public void init() {
         session = HibernateUtil.getSessionFactory().openSession();
-        settings = session.createQuery("select o from Setting o").getResultList();
+        settings = session.createQuery("select o from Setting o", Setting.class).getResultList();
         settingValues = new HashMap<>();
         for (Setting setting : settings) {
             settingValues.put(setting.getId(), setting.getValue());
@@ -39,7 +41,7 @@ public class SettingsBean implements Serializable {
         session.getTransaction().begin();
         for (Map.Entry<Long, String> settingValue : settingValues.entrySet()) {
             Setting setting = session.get(Setting.class, settingValue.getKey());
-            setting.setValue(settingValue.getValue());
+            if (settingValue.getValue() != null && settingValue.getValue().trim().length() > 0) setting.setValue(settingValue.getValue());
             session.update(setting);
         }
         session.getTransaction().commit();

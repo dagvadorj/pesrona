@@ -25,7 +25,7 @@
 
         <h:form>
 
-            <p:dataTable value="#{usersBean.users}" var="user" paginator="true">
+            <p:dataTable value="#{usersBean.users}" var="user" paginator="true" rows="50">
                 <p:column width="100">
                     <h:commandLink value="Edit" action="users_edit" rendered="#{user.type == 'normal'}">
                         <f:param name="username" value="#{user.username}" />

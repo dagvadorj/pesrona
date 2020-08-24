@@ -7,13 +7,14 @@ package pesrona.bean;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
-import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+
 import org.hibernate.Session;
+
 import pesrona.HibernateUtil;
-import pesrona.model.Client;
-import pesrona.model.Role;
 import pesrona.model.Scope;
 
 /**
@@ -24,12 +25,14 @@ import pesrona.model.Scope;
 @ViewScoped
 public class ScopesBean implements Serializable {
 
-    private List<Scope> scopes;
+	private static final long serialVersionUID = 1L;
+
+	private List<Scope> scopes;
 
     @PostConstruct
     public void init() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        scopes = session.createQuery("select o from Scope o").getResultList();
+        scopes = session.createQuery("select o from Scope o", Scope.class).getResultList();
     }
 
     public List<Scope> getScopes() {

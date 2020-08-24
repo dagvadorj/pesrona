@@ -36,9 +36,9 @@ public class PermissionsBean implements Serializable {
     @PostConstruct
     public void init() {
         session = HibernateUtil.getSessionFactory().openSession();
-        permissions = session.createQuery("select o from Permission o").getResultList();
-        roles = session.createQuery("select o from Role o").getResultList();
-        clients = session.createQuery("select o from Client o").getResultList();
+        permissions = session.createQuery("select o from Permission o", Permission.class).getResultList();
+        roles = session.createQuery("select o from Role o", Role.class).getResultList();
+        clients = session.createQuery("select o from Client o", Client.class).getResultList();
     }
 
     public void expire(Permission permission) {

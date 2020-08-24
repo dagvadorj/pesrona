@@ -7,13 +7,15 @@ package pesrona.bean;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
-import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+
 import org.hibernate.Session;
+
 import pesrona.HibernateUtil;
 import pesrona.model.Resource;
-import pesrona.model.Role;
 
 /**
  *

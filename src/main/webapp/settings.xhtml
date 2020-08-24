@@ -21,7 +21,7 @@
                 <h:column>
                     <div class="form-group">
                         <h:inputText value="#{settingsBean.settingValues[setting.id]}" rendered="#{setting.code ne 'LDAP_PASSWORD'}" class="form-control" required="true" requiredMessage="#{setting.name} is required!" />
-                        <h:inputSecret value="#{settingsBean.settingValues[setting.id]}" rendered="#{setting.code eq 'LDAP_PASSWORD'}" class="form-control" required="true" requiredMessage="#{setting.name} is required!" />
+                        <h:inputSecret value="#{settingsBean.settingValues[setting.id]}" rendered="#{setting.code eq 'LDAP_PASSWORD'}" class="form-control" requiredMessage="#{setting.name} is required!" />
                     </div>
                 </h:column>
             </h:dataTable>

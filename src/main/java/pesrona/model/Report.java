@@ -2,11 +2,6 @@ package pesrona.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import pesrona.model.Client;
-import pesrona.model.Resource;
-import pesrona.model.Role;
-import pesrona.model.Scope;
-import pesrona.model.User;
 
 /**
  *
